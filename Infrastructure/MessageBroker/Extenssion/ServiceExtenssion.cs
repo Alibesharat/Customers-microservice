@@ -4,14 +4,14 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceExtenssion
     {
-        public static void AddMessageSender(this IServiceCollection services)
+        public static IServiceCollection AddMessageSender(this IServiceCollection services)
         {
-            services.AddSingleton<IMessageSender, KafkaProducer>();
+           return services.AddSingleton<IMessageSender, KafkaProducer>();
         }
 
-        public static void AddMessegeReciver(this IServiceCollection services)
+        public static IServiceCollection AddMessegeReciver(this IServiceCollection services)
         {
-            services.AddSingleton<IMessageReciver, KafkaReciver>();
+            return services.AddSingleton<IMessageReciver, KafkaReciver>();
         }
     }
 }
