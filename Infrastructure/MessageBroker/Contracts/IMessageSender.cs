@@ -2,7 +2,7 @@
 
 namespace MessageBroker
 {
-    public interface IMessgeSender
+    public interface IMessageSender
     {
      
         Task CreateTopicAsync(string Name);

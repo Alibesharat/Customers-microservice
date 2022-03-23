@@ -3,7 +3,7 @@ using Kafka.Public.Loggers;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace MessageBroker.Implementations
+namespace MessageBroker
 {
     public class KafkaReciver : IMessageReciver
     {
@@ -27,6 +27,7 @@ namespace MessageBroker.Implementations
 
         private void Cluster_MessageReceived(RawKafkaRecord rec)
         {
+            
             MessageRecived?.Invoke(this, rec);
             _logger.LogInformation("Message recived");
         }

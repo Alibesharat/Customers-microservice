@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MessageBroker
 {
-    public class KafkaProducer : IMessgeSender
+    public class KafkaProducer : IMessageSender
     {
 
         AdminClientConfig _adminConfig;
