@@ -24,7 +24,7 @@ namespace MessageBroker
 
 
 
-        public async Task CreateHubAsync(string Name)
+        public async Task CreateTopicAsync(string Name)
         {
             using var adminClient = new AdminClientBuilder(_adminConfig).Build();
 
@@ -55,13 +55,17 @@ namespace MessageBroker
         }
 
 
-        public Task SendMessage(string Messsage)
+        public async Task SendMessage(string Topic, string Key, string Message)
         {
-            //
+            using (var producer = new ProducerBuilder<string, string>(_producerConfig).Build())
+            {
+                var result = await producer.ProduceAsync(Topic, new Message<string, string> {Key=Key, Value = Message });
+                _logger.LogInformation($"Your Message  is queued at offset { result.Offset.Value} in the Topic { result.Topic}");
+            };
 
         }
 
-      
+
 
         private void setup()
         {
@@ -71,7 +75,7 @@ namespace MessageBroker
             { BootstrapServers = Servers };
 
 
-          
+
 
             _producerConfig = new ProducerConfig
             {
