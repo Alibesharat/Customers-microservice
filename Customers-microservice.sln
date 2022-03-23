@@ -10,9 +10,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.Me = Readme.Me
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E22850F9-6F97-4BCD-9BF8-91999F792802}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBroker", "Infrastructure\MessageBroker\MessageBroker.csproj", "{2F4A0B7A-7A2A-4C83-A7F8-67A724BD11C5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F4A0B7A-7A2A-4C83-A7F8-67A724BD11C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4A0B7A-7A2A-4C83-A7F8-67A724BD11C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4A0B7A-7A2A-4C83-A7F8-67A724BD11C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4A0B7A-7A2A-4C83-A7F8-67A724BD11C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2F4A0B7A-7A2A-4C83-A7F8-67A724BD11C5} = {E22850F9-6F97-4BCD-9BF8-91999F792802}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {989EDECF-D893-4FCF-9391-B6D7AAE757B5}
