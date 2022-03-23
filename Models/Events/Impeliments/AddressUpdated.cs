@@ -2,7 +2,7 @@
 
 namespace Events
 {
-    public class AddressUpdated
+    public class AddressUpdated : IEvent
     {
         public Customer Customer { get; set; }
     }

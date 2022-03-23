@@ -73,10 +73,6 @@ namespace MessageBroker
             string Servers = "localhost:9092";
             _adminConfig = new AdminClientConfig
             { BootstrapServers = Servers };
-
-
-
-
             _producerConfig = new ProducerConfig
             {
                 BootstrapServers = Servers,
@@ -84,6 +80,7 @@ namespace MessageBroker
                 EnableDeliveryReports = true,
                 ClientId = Dns.GetHostName()
             };
+
         }
     }
 }

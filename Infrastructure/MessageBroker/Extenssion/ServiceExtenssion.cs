@@ -13,5 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             return services.AddSingleton<IMessageReciver, KafkaReciver>();
         }
+
+
     }
 }
