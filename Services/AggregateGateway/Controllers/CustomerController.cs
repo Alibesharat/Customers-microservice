@@ -1,6 +1,9 @@
 ﻿using Entites;
+using Events;
+using MessageBroker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace AggregateGateway.Controllers
 {
@@ -11,16 +14,16 @@ namespace AggregateGateway.Controllers
     [Route("[controller]")]
     public class CustomerController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+
 
         private readonly ILogger<CustomerController> _logger;
+        private readonly IMessageSender _sender;
 
-        public CustomerController(ILogger<CustomerController> logger)
+        public CustomerController(ILogger<CustomerController> logger, IMessageSender sender)
         {
+
             _logger = logger;
+            _sender = sender;
         }
 
 
@@ -30,17 +33,15 @@ namespace AggregateGateway.Controllers
             return Ok("All Get");
         }
 
-        [HttpGet]
-        public IActionResult Get([FromQuery]string Email)
-        {
-            return Ok($" Get {Email}");
-        }
 
 
         [HttpPost]
-        public IActionResult Add([FromBody] Customer customer)
+        public async Task<IActionResult> Add([FromBody] CustomerCreated customer)
         {
+            var json = System.Text.Json.JsonSerializer.Serialize(customer);
+            await _sender.SendMessage(nameof(CustomerCreated), customer.Email, json);
             return Ok("Add Sucess");
+
         }
 
 
