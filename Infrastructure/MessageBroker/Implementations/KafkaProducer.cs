@@ -57,16 +57,10 @@ namespace MessageBroker
         }
 
 
-
-       
-
-
-
-
-
-
-
-
+        public void SendMessage(string Messsage)
+        {
+            //
+        }
 
         private void setup()
         {
