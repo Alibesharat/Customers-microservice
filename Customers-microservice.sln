@@ -20,6 +20,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Models\Models\E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events", "Models\Events\Events.csproj", "{BFA75869-BA6B-402C-AD2B-680F942DBCB3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4F8BB10C-E8DB-4A92-A822-599E6384BA67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AggregateGateway", "AggregateGateway\AggregateGateway.csproj", "{C7436F7E-1D16-462A-A949-EF0078BDFF59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +42,10 @@ Global
 		{BFA75869-BA6B-402C-AD2B-680F942DBCB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFA75869-BA6B-402C-AD2B-680F942DBCB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFA75869-BA6B-402C-AD2B-680F942DBCB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7436F7E-1D16-462A-A949-EF0078BDFF59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7436F7E-1D16-462A-A949-EF0078BDFF59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7436F7E-1D16-462A-A949-EF0078BDFF59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7436F7E-1D16-462A-A949-EF0078BDFF59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +54,7 @@ Global
 		{2F4A0B7A-7A2A-4C83-A7F8-67A724BD11C5} = {E22850F9-6F97-4BCD-9BF8-91999F792802}
 		{A485820F-314B-491B-B64D-238A79DF4077} = {6D619091-20D8-4878-8AFA-B2F916C70273}
 		{BFA75869-BA6B-402C-AD2B-680F942DBCB3} = {6D619091-20D8-4878-8AFA-B2F916C70273}
+		{C7436F7E-1D16-462A-A949-EF0078BDFF59} = {4F8BB10C-E8DB-4A92-A822-599E6384BA67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {989EDECF-D893-4FCF-9391-B6D7AAE757B5}
