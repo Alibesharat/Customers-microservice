@@ -10,5 +10,8 @@ namespace MessageBroker
         /// <param name="Name"></param>
         /// <returns></returns>
         Task CreateHubAsync(string Name);
+
+
+        Task SendMessage(string Message);
     }
 }

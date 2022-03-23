@@ -1,6 +1,5 @@
 ﻿using Confluent.Kafka;
 using Confluent.Kafka.Admin;
-using Confluent.SchemaRegistry;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ namespace MessageBroker
     {
 
         AdminClientConfig _adminConfig;
-        SchemaRegistryConfig _schemaRegistryConfig;
         ProducerConfig _producerConfig;
         ILogger<KafkaProducer> _logger;
         public KafkaProducer(ILogger<KafkaProducer> logger)
@@ -34,7 +32,7 @@ namespace MessageBroker
             {
                 Name = Name,
                 ReplicationFactor = 1,
-                NumPartitions = 3
+                NumPartitions = 1
             };
             List<TopicSpecification> topics = new();
             topics.Add(topic);
@@ -57,23 +55,27 @@ namespace MessageBroker
         }
 
 
-        public void SendMessage(string Messsage)
+        public Task SendMessage(string Messsage)
         {
             //
+
         }
+
+      
 
         private void setup()
         {
+            //TODO : Config Should Read from AppSettings.Json I just hard Coded for demo 
+            string Servers = "localhost:9092";
             _adminConfig = new AdminClientConfig
-            { BootstrapServers = "localhost:9092" };
+            { BootstrapServers = Servers };
 
 
-            _schemaRegistryConfig = new SchemaRegistryConfig
-            { Url = "http://localhost:8081" };
+          
 
             _producerConfig = new ProducerConfig
             {
-                BootstrapServers = "localhost:9092",
+                BootstrapServers = Servers,
                 // Guarantees delivery of message to topic.
                 EnableDeliveryReports = true,
                 ClientId = Dns.GetHostName()
