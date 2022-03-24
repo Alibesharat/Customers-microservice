@@ -38,18 +38,29 @@ namespace AggregateGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CustomerCreated customer)
         {
-            await _sender.SendMessageToCustomerTopic( customer.Email, customer);
+            await _sender.SendMessageToCustomerTopic(customer.Email, customer);
             return Ok("Add Sucess");
 
         }
 
 
         [HttpPut]
-        public IActionResult Update([FromBody] Customer customer)
+        public async Task<IActionResult> UpdateAsync([FromBody] AddressUpdated address)
         {
+            await _sender.SendMessageToCustomerTopic(address.Customer.Email, address);
+            return Ok("Update Sucess");
+        }
+
+
+        [HttpPut(nameof(OrderCompleted))]
+        public async Task<IActionResult> OrderCompleted([FromBody] OrderCompleted order)
+        {
+            await _sender.SendMessageToCustomerTopic(order.Email, order);
             return Ok("Update Sucess");
         }
 
 
     }
+
 }
+
