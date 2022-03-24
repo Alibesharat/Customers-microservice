@@ -6,6 +6,6 @@ namespace GrpcModelFirst.Contracts
     public interface IOrderService
     {
 
-        Task<OrderCompleteResultDto> OrderComplete(OrderComplateRequestDto dto)
+        Task<OrderCompleteResultDto> OrderComplete(OrderCompleteRequestDto dto);
     }
 }

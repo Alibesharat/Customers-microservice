@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ProtoBuf.Grpc.Server;
+﻿using ProtoBuf.Grpc.Server;
 
-namespace GrpcModelFirst.Extenssion
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceExtesnssion
     {
