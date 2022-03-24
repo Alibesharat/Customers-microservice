@@ -11,7 +11,7 @@ namespace CustomerService
     class Program
     {
         static IStoreService StoreService;
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
 
             CreateHostBuilder(args).Build().Run();
