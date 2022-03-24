@@ -12,7 +12,11 @@ namespace CustomerService.Contracts
         Task Append(string key,string @event);
 
 
-        Task<string> Fetch(string Key);
+        Task<string> FetchLatest(string Key);
+
+
+        Task<List<string>> FeatchAll(string Key);
+
 
 
     }

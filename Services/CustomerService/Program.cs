@@ -23,7 +23,7 @@ namespace CustomerService
             reciver.SubscribeToCustomerTopic();
             reciver.MessageRecived += Reciver_MessageRecived;
 
-           var data= StoreService.Fetch("Ali");
+           var data= StoreService.FeatchAll("Ali");
             await host.RunAsync();
 
         }
