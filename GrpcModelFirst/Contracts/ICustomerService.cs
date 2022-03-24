@@ -9,9 +9,7 @@ namespace GrpcModelFirst.Contracts
     public interface ICustomerService
     {
 
-
         Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto);
-
 
         Task<AchiveCustomerResultDto> ArchiveCustomer(ArchiveCustomerRequestDto dto);
 
