@@ -20,7 +20,8 @@ namespace MessageBroker
 
         public void SubscribeToCustomerTopic()
         {
-            _Cluster.ConsumeFromEarliest("Customer");
+            //_Cluster.ConsumeFromEarliest("Customer");
+            _Cluster.Subscribe("ConsumerGroup", new[] { "Customer"},new ConsumerGroupConfiguration());
             _Cluster.MessageReceived += Cluster_MessageReceived;
 
         }
@@ -38,7 +39,9 @@ namespace MessageBroker
 
             _Cluster = new ClusterClient(new Configuration()
             {
-                Seeds = Servers
+                Seeds = Servers,
+               
+                
             }, new ConsoleLogger());
         }
     }

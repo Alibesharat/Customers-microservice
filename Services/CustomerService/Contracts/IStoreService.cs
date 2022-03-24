@@ -9,7 +9,10 @@ namespace CustomerService.Contracts
     public interface IStoreService
     {
 
-        Task Save(string key,string @event);
+        Task Append(string key,string @event);
+
+
+        Task<string> Fetch(string Key);
 
 
     }

@@ -1,5 +1,7 @@
 ﻿using CustomerService.Contracts;
 using EventStore.Client;
+using System;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -16,14 +18,13 @@ namespace CustomerService.Impelimentions
             client = new EventStoreClient(settings);
         }
 
-        public async Task Save(string Key, string @event)
+        public async Task Append(string Key, string @event)
         {
 
             var eventData = new EventData(
                 Uuid.NewUuid(),
                 "Event",
                 Encoding.UTF8.GetBytes(@event)
-
             );
 
             await client.AppendToStreamAsync(
@@ -33,5 +34,13 @@ namespace CustomerService.Impelimentions
 
 
         }
+
+        public async Task<string> Fetch(string Key)
+        {
+            var result =await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End, 1).LastAsync();
+            return Encoding.UTF8.GetString(result.Event.Data.ToArray());
+        }
+
+
     }
 }

@@ -82,6 +82,9 @@ namespace MessageBroker
                 BootstrapServers = Servers,
                 // Guarantees delivery of message to topic.
                 EnableDeliveryReports = true,
+                EnableIdempotence=true,
+                EnableGaplessGuarantee=true,
+                
                 ClientId = Dns.GetHostName()
             };
 

@@ -10,7 +10,7 @@ namespace CustomerService
 {
     class Program
     {
-       static IStoreService StoreService;
+        static IStoreService StoreService;
         static async Task Main(string[] args)
         {
 
@@ -22,16 +22,15 @@ namespace CustomerService
             var reciver = host.Services.GetRequiredService<IMessageReciver>();
             reciver.SubscribeToCustomerTopic();
             reciver.MessageRecived += Reciver_MessageRecived;
-            
 
+           var data= StoreService.Fetch("Ali");
             await host.RunAsync();
 
         }
 
         private static void Reciver_MessageRecived(object sender, Kafka.Public.RawKafkaRecord e)
         {
-            Console.WriteLine(e.GetValue());
-            StoreService.Save(e.GetKey(),e.GetValue());
+            StoreService.Append(e.GetKey(), e.GetValue());
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)
