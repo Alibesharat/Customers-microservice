@@ -1,4 +1,5 @@
-﻿using ProtoBuf.Grpc.Server;
+﻿using GrpcModelFirst;
+using ProtoBuf.Grpc.Server;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -18,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static void AddGrpcClient(this IServiceCollection services)
         {
-            services.Add
+            services.AddSingleton<IGrpcBaseChannel, GrpcBaseChannel>();
         }
 
 

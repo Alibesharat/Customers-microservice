@@ -1,13 +1,13 @@
 ﻿using Grpc.Net.Client;
 using ProtoBuf.Grpc.Client;
 
-namespace GrpcModelFirst.Contracts
+namespace GrpcModelFirst
 {
-    public class Channel
+    public class GrpcBaseChannel : IGrpcBaseChannel
     {
         readonly GrpcChannel CustomerChannel;
         readonly GrpcChannel OrderChannel;
-        public Channel()
+        public GrpcBaseChannel()
         {
             GrpcClientFactory.AllowUnencryptedHttp2 = true;
 

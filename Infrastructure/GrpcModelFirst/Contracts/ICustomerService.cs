@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace GrpcModelFirst.Contracts
+namespace GrpcModelFirst
 {
     [ServiceContract]
 

@@ -1,7 +1,7 @@
 ﻿using GrpcModelFirst.Models;
 using System.Threading.Tasks;
 
-namespace GrpcModelFirst.Contracts
+namespace GrpcModelFirst
 {
     public interface IOrderService
     {
