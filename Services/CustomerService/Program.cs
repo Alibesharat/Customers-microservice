@@ -1,6 +1,7 @@
 ﻿using CustomerService.Contracts;
 using CustomerService.Impelimentions;
 using MessageBroker;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
@@ -13,17 +14,17 @@ namespace CustomerService
         static async Task Main(string[] args)
         {
 
+            CreateHostBuilder(args).Build().Run();
+            //var host = CreateHostBuilder(args).Build();
+            ////Do Code
 
-            var host = CreateHostBuilder(args).Build();
-            //Do Code
+            //StoreService = host.Services.GetRequiredService<IStoreService>();
+            //var reciver = host.Services.GetRequiredService<IMessageReciver>();
+            //reciver.SubscribeToCustomerTopic();
+            //reciver.MessageRecived += Reciver_MessageRecived;
 
-            StoreService = host.Services.GetRequiredService<IStoreService>();
-            var reciver = host.Services.GetRequiredService<IMessageReciver>();
-            reciver.SubscribeToCustomerTopic();
-            reciver.MessageRecived += Reciver_MessageRecived;
-
-           var data= StoreService.Fetch("Ali");
-            await host.RunAsync();
+            //var data = StoreService.Fetch("Ali");
+            //await host.RunAsync();
 
         }
 
@@ -32,17 +33,12 @@ namespace CustomerService
             StoreService.Append(e.GetKey(), e.GetValue());
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-             .ConfigureServices((_, services) =>
-                 services.AddMessageSender()
-                 .AddMessegeReciver()
-                 .AddSingleton<IStoreService, EventStoreService>()
-                 .AddLogging());
-
-
-        }
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GrpcModelFirst.Models
 {
-   public class AchiveCustomerResultDto : BaseResult
+    public class AchiveCustomerResultDto : BaseResult
     {
     }
 }
