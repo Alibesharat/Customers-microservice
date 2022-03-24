@@ -14,7 +14,7 @@ namespace GrpcModelFirst.Models
         public Address Address { get; set; }
     }
 
-
+    [DataContract]
     public class Address
     {
         [DataMember(Order = 1)]

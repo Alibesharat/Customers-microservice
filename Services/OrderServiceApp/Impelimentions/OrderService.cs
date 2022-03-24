@@ -1,4 +1,4 @@
-﻿using GrpcModelFirst.Contracts;
+﻿using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using System;
 using System.Threading.Tasks;

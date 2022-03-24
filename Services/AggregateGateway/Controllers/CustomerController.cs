@@ -1,5 +1,6 @@
 ﻿using Entites;
 using Events;
+using GrpcModelFirst;
 using MessageBroker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,12 +19,14 @@ namespace AggregateGateway.Controllers
 
         private readonly ILogger<CustomerController> _logger;
         private readonly IMessageSender _sender;
+        ICustomerService customerService;
 
-        public CustomerController(ILogger<CustomerController> logger, IMessageSender sender)
+        public CustomerController(ILogger<CustomerController> logger, IMessageSender sender, IGrpcBaseChannel grpcBaseChannel)
         {
 
             _logger = logger;
             _sender = sender;
+            customerService = grpcBaseChannel.GetCustomerService();
         }
 
 
@@ -38,9 +41,20 @@ namespace AggregateGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CustomerCreated customer)
         {
-            await _sender.SendMessageToCustomerTopic(customer.Email, customer);
-            return Ok("Add Sucess");
+            //await _sender.SendMessageToCustomerTopic(customer.Email, customer);
+            //return Ok("Add Sucess");
 
+           var result= await customerService.CreateCustomer(new GrpcModelFirst.Models.CreatCustomerRequestDto()
+            {
+                Email = "email",
+                Address = new GrpcModelFirst.Models.Address()
+                {
+                    City = "tehran",
+                    Country = "Iran",
+                    Street = "Azadi"
+                }
+            });
+            return Ok(result);
         }
 
 

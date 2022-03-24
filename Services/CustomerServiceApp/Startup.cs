@@ -1,4 +1,5 @@
-﻿using GrpcModelFirst.Contracts;
+﻿using CustomerServiceApp.Impelimentions;
+using GrpcModelFirst;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ namespace CustomerServiceApp
             services.AddMessegeReciver();
             services.AddStoreService();
             services.AddGrpcServer();
+            services.AddSingleton<ICustomerService, CustomerService>();
             services.AddLogging();
         }
 

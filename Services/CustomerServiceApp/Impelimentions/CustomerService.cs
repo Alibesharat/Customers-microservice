@@ -1,14 +1,15 @@
-﻿using GrpcModelFirst.Contracts;
+﻿using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CustomerServiceApp.Impelimentions
 {
     public class CustomerService : ICustomerService
     {
+
+       
+       
         public Task<AchiveCustomerResultDto> ArchiveCustomer(ArchiveCustomerRequestDto dto)
         {
             throw new NotImplementedException();
