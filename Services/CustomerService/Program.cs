@@ -3,7 +3,6 @@ using CustomerService.Impelimentions;
 using MessageBroker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Threading.Tasks;
 
 namespace CustomerService

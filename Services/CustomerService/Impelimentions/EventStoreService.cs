@@ -38,8 +38,6 @@ namespace CustomerService.Impelimentions
         public async Task<string> Fetch(string Key)
         {
             var result =await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End, 1).LastAsync();
-
-
             return Encoding.UTF8.GetString(result.Event.Data.ToArray());
         }
 
