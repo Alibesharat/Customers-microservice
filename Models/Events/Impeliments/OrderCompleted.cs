@@ -1,6 +1,6 @@
 ﻿namespace Events
 {
-    public class OrderCompleted : IEvent
+    public class OrderCompleted : Event
     {
         public string Email { get; set; }
     }

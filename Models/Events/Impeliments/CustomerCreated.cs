@@ -2,7 +2,7 @@
 
 namespace Events
 {
-    public class CustomerCreated : IEvent
+    public class CustomerCreated : Event
     {
         public string Email { get; set; }
 

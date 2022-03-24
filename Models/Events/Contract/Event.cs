@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Events
 {
-    public interface IEvent
+    public abstract class Event
     {
     }
 }
