@@ -18,9 +18,9 @@ namespace MessageBroker
             _logger = logger;
         }
 
-        public void Subscribe(string Topic)
+        public void SubscribeToCustomerTopic()
         {
-            _Cluster.ConsumeFromEarliest(Topic);
+            _Cluster.ConsumeFromEarliest("Customer");
             _Cluster.MessageReceived += Cluster_MessageReceived;
 
         }

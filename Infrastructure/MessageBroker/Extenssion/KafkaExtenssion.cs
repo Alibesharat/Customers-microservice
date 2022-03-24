@@ -1,7 +1,7 @@
 ﻿using Kafka.Public;
 using System.Text;
 
-namespace MessageBroker.Extenssion
+namespace MessageBroker
 {
     public static class  KafkaExtenssion
     {
