@@ -1,7 +1,6 @@
 ﻿using CustomerService.Contracts;
 using EventStore.Client;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -36,27 +35,14 @@ namespace CustomerService.Impelimentions
 
         }
 
-
-
-        public async Task<string> FetchLatest(string Key)
+        public async Task<string> Fetch(string Key)
         {
-            var result = await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End, 1).LastAsync();
+            var result =await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End, 1).LastAsync();
+
+
             return Encoding.UTF8.GetString(result.Event.Data.ToArray());
         }
 
-        public async Task<List<string>> FeatchAll(string Key)
-        {
-            List<string> events = new();
-            var result = await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End).ToListAsync();
-            
-            foreach (var ev in result)
-            {
-                events.Add(Encoding.UTF8.GetString(ev.Event.Data.ToArray()));
-            }
 
-            return events;
-
-
-        }
     }
 }
