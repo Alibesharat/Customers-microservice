@@ -1,12 +1,9 @@
-﻿using CustomerService.Contracts;
-using CustomerService.Impelimentions;
+﻿using CustomerServiceApp.Contracts;
 using MessageBroker;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
 
-namespace CustomerService
+namespace CustomerServiceApp
 {
     class Program
     {

@@ -1,4 +1,4 @@
-﻿using CustomerService.Contracts;
+﻿using CustomerServiceApp.Contracts;
 using EventStore.Client;
 using System;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CustomerService.Impelimentions
+namespace CustomerServiceApp.Impelimentions
 {
     public class EventStoreService : IStoreService
     {

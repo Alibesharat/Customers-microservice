@@ -1,11 +1,11 @@
-﻿using CustomerService.Contracts;
-using CustomerService.Impelimentions;
+﻿using CustomerServiceApp.Contracts;
+using CustomerServiceApp.Impelimentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CustomerService
+namespace CustomerServiceApp
 {
     public class Startup
     {
