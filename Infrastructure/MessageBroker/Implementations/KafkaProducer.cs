@@ -1,6 +1,8 @@
 ﻿using Confluent.Kafka;
 using Confluent.Kafka.Admin;
+using Events;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,11 +57,13 @@ namespace MessageBroker
         }
 
 
-        public async Task SendMessage(string Topic, string Key, string Message)
+        public async Task SendMessageToCustomerTopic(string Key, Event message)
         {
+
+            var json = JsonConvert.SerializeObject(message);
             using (var producer = new ProducerBuilder<string, string>(_producerConfig).Build())
             {
-                var result = await producer.ProduceAsync(Topic, new Message<string, string> {Key=Key, Value = Message });
+                var result = await producer.ProduceAsync("Customer", new Message<string, string> { Key = Key, Value = json });
                 _logger.LogInformation($"Your Message  is queued at offset { result.Offset.Value} in the Topic { result.Topic}");
             };
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Events;
+using System.Threading.Tasks;
 
 namespace MessageBroker
 {
@@ -8,6 +9,6 @@ namespace MessageBroker
         Task CreateTopicAsync(string Name);
 
 
-        Task SendMessage(string Topic,string Key,string Message);
+        Task SendMessageToCustomerTopic(string Key,Event Message);
     }
 }

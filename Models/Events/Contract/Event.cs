@@ -1,6 +1,6 @@
 ﻿namespace Events
 {
-    public abstract class Event
+    public abstract class  Event
     {
     }
 }

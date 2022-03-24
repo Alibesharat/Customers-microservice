@@ -33,7 +33,6 @@ namespace AggregateGateway
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageSender messageSender)
         {
-            messageSender.EnusreTopicsExist();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

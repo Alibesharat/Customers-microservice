@@ -38,8 +38,7 @@ namespace AggregateGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CustomerCreated customer)
         {
-            var json = System.Text.Json.JsonSerializer.Serialize(customer);
-            await _sender.SendMessage(nameof(CustomerCreated), customer.Email, json);
+            await _sender.SendMessageToCustomerTopic( customer.Email, customer);
             return Ok("Add Sucess");
 
         }
