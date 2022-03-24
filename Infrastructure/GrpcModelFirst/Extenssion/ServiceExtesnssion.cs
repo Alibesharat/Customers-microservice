@@ -16,6 +16,12 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
 
+        public static void AddGrpcClient(this IServiceCollection services)
+        {
+            services.Add
+        }
+
+
 
 
 
