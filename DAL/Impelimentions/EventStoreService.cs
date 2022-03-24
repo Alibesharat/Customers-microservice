@@ -1,12 +1,10 @@
-﻿using CustomerServiceApp.Contracts;
+﻿using DAL;
 using EventStore.Client;
-using System;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CustomerServiceApp.Impelimentions
+namespace DAl.Impelimentions
 {
     public class EventStoreService : IStoreService
     {
