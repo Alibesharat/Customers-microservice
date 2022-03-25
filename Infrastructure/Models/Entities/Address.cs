@@ -1,4 +1,4 @@
-﻿namespace Entites
+﻿namespace Models.Entites
 {
 
     //TODO : All attributes are required.

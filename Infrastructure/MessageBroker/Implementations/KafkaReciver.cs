@@ -14,13 +14,12 @@ namespace MessageBroker
 
         public KafkaReciver(ILogger<KafkaReciver> logger)
         {
-            setup();
+            Setup();
             _logger = logger;
         }
 
         public void SubscribeToOrderTopic()
         {
-            //_Cluster.ConsumeFromEarliest("Customer");
             _Cluster.Subscribe("ConsumerGroup", new[] { "Order"},new ConsumerGroupConfiguration());
             _Cluster.MessageReceived += Cluster_MessageReceived;
 
@@ -33,7 +32,7 @@ namespace MessageBroker
             _logger.LogInformation("Message recived");
         }
 
-        private void setup()
+        private void Setup()
         {
             string Servers = "localhost:9092";
 

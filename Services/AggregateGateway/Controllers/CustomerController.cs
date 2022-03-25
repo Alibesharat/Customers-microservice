@@ -1,6 +1,4 @@
-﻿using Entites;
-using Events;
-using GrpcModelFirst;
+﻿using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using MessageBroker;
 using Microsoft.AspNetCore.Mvc;

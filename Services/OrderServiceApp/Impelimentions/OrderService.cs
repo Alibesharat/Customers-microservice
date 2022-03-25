@@ -1,8 +1,8 @@
-﻿using Events;
-using GrpcModelFirst;
+﻿using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using Mapster;
 using MessageBroker;
+using Models.Events;
 
 namespace OrderServiceApp.Impelimentions
 {

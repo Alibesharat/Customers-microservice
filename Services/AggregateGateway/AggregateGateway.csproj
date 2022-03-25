@@ -13,7 +13,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Infrastructure\GrpcModelFirst\GrpcModelFirst.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\MessageBroker\MessageBroker.csproj" />
-		<ProjectReference Include="..\..\Models\Events\Events.csproj" />
 	</ItemGroup>
 
 </Project>

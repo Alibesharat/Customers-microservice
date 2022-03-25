@@ -1,10 +1,10 @@
 ﻿using DAL;
-using Entites;
 using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using Mapster;
 using MessageBroker;
 using Microsoft.Extensions.Logging;
+using Models.Entites;
 using System;
 using System.Threading.Tasks;
 
@@ -35,13 +35,13 @@ namespace CustomerServiceApp.Impelimentions
                     result.Message = "The Email is already Exist";
                     return result;
                 }
-                var Customer = new Customer()
+                var customer = new Customer()
                 {
                     CreatedAt = DateTime.Now.ToUniversalTime(),
                     Email = dto.Email,
-                    Address = dto.Address.Adapt<Entites.Address>()
+                    Address = dto.Address.Adapt<Models.Entites.Address>()
                 };
-                await _storeService.AppendAsync(dto.Email, Customer);
+                await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Created Successfully";
             }
@@ -101,7 +101,7 @@ namespace CustomerServiceApp.Impelimentions
                     result.IsSuccess = false;
                     return result;
                 }
-                customer.Address = dto.Address.Adapt<Entites.Address>();
+                customer.Address = dto.Address.Adapt<Models.Entites.Address>();
                 await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Address Updated Successfully";

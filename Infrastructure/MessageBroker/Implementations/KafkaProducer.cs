@@ -1,7 +1,7 @@
 ﻿using Confluent.Kafka;
 using Confluent.Kafka.Admin;
-using Events;
 using Microsoft.Extensions.Logging;
+using Models.Events;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

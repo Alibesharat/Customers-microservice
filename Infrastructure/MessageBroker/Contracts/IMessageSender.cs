@@ -1,4 +1,4 @@
-﻿using Events;
+﻿using Models.Events;
 using System.Threading.Tasks;
 
 namespace MessageBroker

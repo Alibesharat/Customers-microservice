@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entites
+namespace Models.Entites
 {
     //TODO : All attributes are required.
     public class Customer
