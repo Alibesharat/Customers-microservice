@@ -95,10 +95,10 @@ namespace CustomerServiceApp.Impelimentions
 
 
 
-        private async Task OrderMessageRecived(object sender, Kafka.Public.RawKafkaRecord e)
+        private async void OrderMessageRecived(object sender, Kafka.Public.RawKafkaRecord e)
         {
 
-           
+
             try
             {
                 var customer = await _storeService.FetchAsync<Customer>(e.GetKey());

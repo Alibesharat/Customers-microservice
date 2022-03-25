@@ -1,4 +1,4 @@
-﻿using GrpcModelFirst.Contracts;
+﻿using GrpcModelFirst;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
