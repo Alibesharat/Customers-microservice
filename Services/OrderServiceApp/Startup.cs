@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrderServiceApp.Impelimentions;
 
 namespace OrderServiceApp
 {
@@ -21,6 +22,8 @@ namespace OrderServiceApp
 
             services.AddMessageSender();
             services.AddGrpcServer();
+            services.AddSingleton<IOrderService, OrderService>();
+
             services.AddLogging();
         }
 
