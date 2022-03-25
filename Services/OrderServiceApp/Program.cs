@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
+using System.Net;
 
 namespace OrderServiceApp
 {
@@ -15,16 +16,19 @@ namespace OrderServiceApp
 
 
 
-        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .ConfigureKestrel(options =>
-            {
-                options.ListenAnyIP(10043, listenOptions =>
-                {
-                    listenOptions.Protocols = HttpProtocols.Http2;
-                });
-            })
-            .UseStartup<Startup>();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+         Host.CreateDefaultBuilder(args)
+             .ConfigureWebHostDefaults(webBuilder =>
+             {
+                 webBuilder.UseStartup<Startup>().ConfigureKestrel(options =>
+                 {
+                     options.Listen(IPAddress.Any, 10043, listenOptions =>
+                     {
+                         listenOptions.Protocols = HttpProtocols.Http2;
+
+                     });
+                 });
+             });
     }
 
 
