@@ -3,7 +3,13 @@
 namespace GrpcModelFirst.Models
 {
     [DataContract]
-    public class OrderCompleteResultDto : BaseResult
+    public class OrderCompleteResultDto 
     {
+        [DataMember(Order = 1)]
+        public bool IsSuccess { get; set; }
+
+        [DataMember(Order = 2)]
+
+        public string Message { get; set; }
     }
 }

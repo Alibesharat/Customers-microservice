@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 namespace GrpcModelFirst.Models
 {
     [DataContract]
-    public class AchiveCustomerResultDto : BaseResult
+    public class AchiveCustomerResultDto 
     {
+        [DataMember(Order =1)]
+        public bool IsSuccess { get; set; }
+
+        [DataMember(Order=2)]
+
+        public string Message { get; set; }
     }
 }
