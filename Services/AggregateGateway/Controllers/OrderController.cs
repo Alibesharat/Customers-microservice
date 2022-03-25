@@ -30,7 +30,11 @@ namespace AggregateGateway.Controllers
 
 
 
-
+        /// <summary>
+        ///  Complete Order
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
 
         [HttpPut]
         public IActionResult SetOder([FromBody] OrderCompleteRequestDto dto)
