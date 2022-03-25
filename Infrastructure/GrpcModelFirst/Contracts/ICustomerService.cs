@@ -9,6 +9,10 @@ namespace GrpcModelFirst
     public interface ICustomerService
     {
         [OperationContract]
+        Task<GetCustomerResultDto> GetCustomer(GetCustomerRequestDto dto);
+
+
+        [OperationContract]
 
         Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto);
 
@@ -19,5 +23,9 @@ namespace GrpcModelFirst
         [OperationContract]
 
         Task<UpdateCustomerAddressResultDto> UpdateCustomerAdress(UpdateCustomerAddressRequestDto dto);
+    
+    
+    
+    
     }
 }
