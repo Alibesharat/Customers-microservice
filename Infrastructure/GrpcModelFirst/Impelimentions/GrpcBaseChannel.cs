@@ -12,7 +12,7 @@ namespace GrpcModelFirst
             GrpcClientFactory.AllowUnencryptedHttp2 = true;
 
             CustomerChannel = GrpcChannel.ForAddress("http://customer:10042");
-            OrderChannel = GrpcChannel.ForAddress("http://localhost:10043");
+            OrderChannel = GrpcChannel.ForAddress("http://order:10043");
 
         }
 
