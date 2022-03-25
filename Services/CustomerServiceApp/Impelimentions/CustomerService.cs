@@ -38,6 +38,7 @@ namespace CustomerServiceApp.Impelimentions
                 };
                 await _storeService.AppendAsync(dto.Email, Customer);
                 result.IsSuccess = true;
+                result.Message = "Customer Created Successfully";
             }
             catch (Exception ex)
             {
@@ -58,6 +59,8 @@ namespace CustomerServiceApp.Impelimentions
                 customer.IsArchived = true;
                 await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
+                result.Message = "Customer Archived Successfully";
+
             }
             catch (Exception ex)
             {
@@ -79,6 +82,8 @@ namespace CustomerServiceApp.Impelimentions
                 customer.Address = dto.Address.Adapt<Entites.Address>();
                 await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
+                result.Message = "Customer Address Updated Successfully";
+
             }
             catch (Exception ex)
             {

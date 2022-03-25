@@ -32,9 +32,10 @@ namespace AggregateGateway.Controllers
 
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromQuery] GetCustomerRequestDto dto)
         {
-            return Ok("All Get");
+            var result = await customerService.GetCustomer(dto);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
         }
 
 
@@ -46,7 +47,7 @@ namespace AggregateGateway.Controllers
             //return Ok("Add Sucess");
 
             var result = await customerService.CreateCustomer(customer);
-            return result.IsSuccess ? Ok() : BadRequest(result.Message);
+            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
         }
 
 
@@ -54,7 +55,7 @@ namespace AggregateGateway.Controllers
         public async Task<IActionResult> UpdateAddressAsync([FromBody] UpdateCustomerAddressRequestDto address)
         {
             var result = await customerService.UpdateCustomerAdress(address);
-            return result.IsSuccess ? Ok() : BadRequest(result.Message);
+            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
         }
 
 
@@ -62,7 +63,7 @@ namespace AggregateGateway.Controllers
         public async Task<IActionResult> ArchiveCustomer([FromBody] ArchiveCustomerRequestDto dto)
         {
             var result = await customerService.ArchiveCustomer(dto);
-            return result.IsSuccess ? Ok() : BadRequest(result.Message);
+            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
         }
 
 
