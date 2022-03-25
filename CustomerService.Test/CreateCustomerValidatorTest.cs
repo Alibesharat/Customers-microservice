@@ -25,13 +25,14 @@ namespace CustomerService.Test
         }
 
 
-        //[Test]
-        //public void Should_have_error_when_Address_is_Null()
-        //{
-        //    var model = new CreateCustomerRequestDto { Address = null };
-        //    var result = validator.TestValidate(model);
-        //    result.ShouldNotHaveValidationErrorFor(c => c.Address);
-        //}
+        [Test]
+        public void Should_have_error_when_Email_is_Not_valid()
+        {
+            var model = new CreateCustomerRequestDto { Email = "12" };
+            var result = validator.TestValidate(model);
+            result.ShouldHaveValidationErrorFor(c => c.Email);
+        }
+
 
         [Test]
         public void Should_have_error_when_Street_is_Null()
@@ -71,12 +72,5 @@ namespace CustomerService.Test
         }
 
 
-        [Test]
-        public void Should_have_error_when_Email_is_Not_valid()
-        {
-            var model = new CreateCustomerRequestDto { Email = "12" };
-            var result = validator.TestValidate(model);
-            result.ShouldHaveValidationErrorFor(c => c.Email);
-        }
     }
 }
