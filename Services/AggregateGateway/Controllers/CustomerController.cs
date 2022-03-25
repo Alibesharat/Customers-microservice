@@ -30,7 +30,11 @@ namespace AggregateGateway.Controllers
             customerService = grpcBaseChannel.GetCustomerService();
         }
 
-
+        /// <summary>
+        /// Get the Customer By Email
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetCustomerRequestDto dto)
         {
@@ -39,7 +43,11 @@ namespace AggregateGateway.Controllers
         }
 
 
-
+        /// <summary>
+        /// Create New Customer
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreatCustomerRequestDto customer)
         {
@@ -51,6 +59,11 @@ namespace AggregateGateway.Controllers
         }
 
 
+        /// <summary>
+        /// Update Address of Customer
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> UpdateAddressAsync([FromBody] UpdateCustomerAddressRequestDto address)
         {
@@ -59,7 +72,12 @@ namespace AggregateGateway.Controllers
         }
 
 
-        [HttpPut(nameof(OrderCompleted))]
+        /// <summary>
+        /// Archive Customer
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPut(nameof(ArchiveCustomer))]
         public async Task<IActionResult> ArchiveCustomer([FromBody] ArchiveCustomerRequestDto dto)
         {
             var result = await customerService.ArchiveCustomer(dto);
