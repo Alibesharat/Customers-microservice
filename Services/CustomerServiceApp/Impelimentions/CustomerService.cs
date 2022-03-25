@@ -37,7 +37,7 @@ namespace CustomerServiceApp.Impelimentions
                 }
                 var Customer = new Customer()
                 {
-                    CreatedAt = DateTime.Now,
+                    CreatedAt = DateTime.Now.ToUniversalTime(),
                     Email = dto.Email,
                     Address = dto.Address.Adapt<Entites.Address>()
                 };
@@ -134,7 +134,7 @@ namespace CustomerServiceApp.Impelimentions
                 var customer = await _storeService.FetchAsync<Customer>(e.GetKey());
                 if (customer != null)
                 {
-                    customer.PurchasedAt = DateTime.Now;
+                    customer.PurchasedAt = DateTime.Now.ToUniversalTime();
                     await _storeService.AppendAsync(customer.Email, customer);
 
                 }

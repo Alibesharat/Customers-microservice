@@ -25,7 +25,7 @@ namespace Entites
 
         //TODO :Must be UTC DateTime
 
-        public DateTime PurchasedAt { get; set; }
+        public DateTime? PurchasedAt { get; set; }
 
 
 

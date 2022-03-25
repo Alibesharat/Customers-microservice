@@ -14,7 +14,6 @@ namespace GrpcModelFirst.Models
         public Address Address { get; set; }
 
         [DataMember(Order = 3)]
-        //TODO :Must be UTC DateTime
 
         public DateTime CreatedAt { get; set; }
 
@@ -22,10 +21,9 @@ namespace GrpcModelFirst.Models
 
         public bool IsArchived { get; set; }
 
-        //TODO :Must be UTC DateTime
         [DataMember(Order = 5)]
 
-        public DateTime PurchasedAt { get; set; }
+        public DateTime? PurchasedAt { get; set; }
 
 
         [DataMember(Order = 6)]
