@@ -34,6 +34,8 @@ namespace AggregateGateway
             services.AddMessageSender();
             services.AddMessegeReciver();
             services.AddGrpcClient();
+            services.AddValidator();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

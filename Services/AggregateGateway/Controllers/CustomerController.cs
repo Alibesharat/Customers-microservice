@@ -1,9 +1,10 @@
 ﻿using GrpcModelFirst;
-using GrpcModelFirst.Models;
 using MessageBroker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Models.Dtos;
 using System.Threading.Tasks;
+using Validators;
 
 namespace AggregateGateway.Controllers
 {
@@ -19,13 +20,15 @@ namespace AggregateGateway.Controllers
         private readonly ILogger<CustomerController> _logger;
         private readonly IMessageSender _sender;
         ICustomerService customerService;
+        ICustomeValidator _Validator;
 
-        public CustomerController(ILogger<CustomerController> logger, IMessageSender sender, IGrpcBaseChannel grpcBaseChannel)
+        public CustomerController(ILogger<CustomerController> logger, IMessageSender sender, IGrpcBaseChannel grpcBaseChannel, ICustomeValidator validator)
         {
 
             _logger = logger;
             _sender = sender;
             customerService = grpcBaseChannel.GetCustomerService();
+            _Validator = validator;
         }
 
         /// <summary>
