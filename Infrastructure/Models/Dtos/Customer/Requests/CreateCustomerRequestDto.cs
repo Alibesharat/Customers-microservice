@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GrpcModelFirst.Models
+namespace Models.Dtos
 {
     [DataContract]
 
-    public class CreatCustomerRequestDto
+    public class CreateCustomerRequestDto
     {
 
         [DataMember(Order = 1)]

@@ -1,4 +1,5 @@
 ﻿using DAL;
+using FluentValidation.Results;
 using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using Mapster;
@@ -6,7 +7,9 @@ using MessageBroker;
 using Microsoft.Extensions.Logging;
 using Models.Entites;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Validators;
 
 namespace CustomerServiceApp.Impelimentions
 {
@@ -14,10 +17,12 @@ namespace CustomerServiceApp.Impelimentions
     {
         IStoreService _storeService;
         ILogger<CustomerService> _logger;
-        public CustomerService(IStoreService storeService, ILogger<CustomerService> logger, IMessageReciver messageReciver)
+        ICustomeValidator _Validator;
+        public CustomerService(IStoreService storeService, ILogger<CustomerService> logger, IMessageReciver messageReciver, ICustomeValidator validator)
         {
             _storeService = storeService;
             _logger = logger;
+            _Validator = validator;
             messageReciver.SubscribeToOrderTopic();
             messageReciver.MessageRecived += OrderMessageRecived;
         }
@@ -41,6 +46,17 @@ namespace CustomerServiceApp.Impelimentions
                     Email = dto.Email,
                     Address = dto.Address.Adapt<Models.Entites.Address>()
                 };
+
+                var validationresult = _Validator.ValidateCustomer(customer);
+                if (!validationresult.IsValid)
+                {
+                    result.IsSuccess = false;
+                    result.Message = validationresult.Errors;
+                    return result;
+                }
+
+
+
                 await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Created Successfully";
@@ -60,10 +76,10 @@ namespace CustomerServiceApp.Impelimentions
             var result = new AchiveCustomerResultDto();
             try
             {
-                
+
                 var customer = await _storeService.FetchAsync<Customer>(dto.Email);
 
-                if (customer==null)
+                if (customer == null)
                 {
                     result.IsSuccess = false;
                     result.Message = "The Email is Not Exist";
@@ -92,7 +108,7 @@ namespace CustomerServiceApp.Impelimentions
             var result = new UpdateCustomerAddressResultDto();
             try
             {
-               
+
                 var customer = await _storeService.FetchAsync<Customer>(dto.Email);
 
                 if (customer == null)

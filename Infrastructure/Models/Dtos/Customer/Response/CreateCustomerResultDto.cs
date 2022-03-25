@@ -1,7 +1,6 @@
-﻿using ProtoBuf;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace GrpcModelFirst.Models
+namespace Models.Dtos
 {
     [DataContract]
     public class CreateCustomerResultDto 

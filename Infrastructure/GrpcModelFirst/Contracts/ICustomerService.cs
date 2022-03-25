@@ -1,4 +1,4 @@
-﻿using GrpcModelFirst.Models;
+﻿using Models.Dtos;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -14,7 +14,7 @@ namespace GrpcModelFirst
 
         [OperationContract]
 
-        Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto);
+        Task<CreateCustomerResultDto> CreateCustomer(CreateCustomerRequestDto dto);
 
         [OperationContract]
 

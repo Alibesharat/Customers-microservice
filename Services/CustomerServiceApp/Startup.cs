@@ -25,6 +25,7 @@ namespace CustomerServiceApp
             services.AddStoreService();
             services.AddGrpcServer();
             services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddValidator();
             services.AddLogging();
         }
 

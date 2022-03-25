@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GrpcModelFirst.Models
+namespace Models.Dtos
 {
     [DataContract]
     public class ArchiveCustomerResultDto 

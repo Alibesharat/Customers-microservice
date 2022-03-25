@@ -36,6 +36,7 @@ namespace AggregateGateway.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetCustomerRequestDto dto)
         {
+           
             var result = await customerService.GetCustomer(dto);
             return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
         }

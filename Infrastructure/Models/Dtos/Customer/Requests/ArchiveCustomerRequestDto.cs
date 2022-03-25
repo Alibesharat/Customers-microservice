@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GrpcModelFirst.Models
+namespace Models.Dtos
 {
     [DataContract]
-    public class GetCustomerRequestDto
+    public class ArchiveCustomerRequestDto
     {
         [DataMember(Order = 1)]
         public string Email { get; set; }

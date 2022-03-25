@@ -1,4 +1,4 @@
-﻿using GrpcModelFirst.Models;
+﻿using Models.Dtos;
 using System.ServiceModel;
 
 namespace GrpcModelFirst
