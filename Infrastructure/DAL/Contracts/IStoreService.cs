@@ -5,10 +5,10 @@ namespace DAL
     public interface IStoreService
     {
 
-        Task AppendAsync(string key,string @event);
+        Task AppendAsync<T>(string key,T @event);
 
 
-        Task<string> FetchAsync(string Key);
+        Task<T> FetchAsync<T>(string Key);
 
 
     }

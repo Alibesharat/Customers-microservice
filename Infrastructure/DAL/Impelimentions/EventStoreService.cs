@@ -1,5 +1,6 @@
 ﻿using DAL;
 using EventStore.Client;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,27 +17,29 @@ namespace DAl.Impelimentions
             client = new EventStoreClient(settings);
         }
 
-        public async Task AppendAsync(string Key, string @event)
+        public async Task AppendAsync<T>(string Key, T @event)
         {
 
+            var jsondata = JsonConvert.SerializeObject(@event);
             var eventData = new EventData(
                 Uuid.NewUuid(),
                 "Event",
-                Encoding.UTF8.GetBytes(@event)
+                Encoding.UTF8.GetBytes(jsondata)
             );
 
             await client.AppendToStreamAsync(
            Key,
             StreamState.Any,
             new[] { eventData });
-           
+
 
         }
 
-        public async Task<string> FetchAsync(string Key)
+        public async Task<T> FetchAsync<T>(string Key)
         {
-            var result =await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End, 1).LastAsync();
-            return Encoding.UTF8.GetString(result.Event.Data.ToArray());
+            var result = await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End, 1).LastAsync();
+            var jsondata = Encoding.UTF8.GetString(result.Event.Data.ToArray());
+            return JsonConvert.DeserializeObject<T>(jsondata);
         }
 
 

@@ -1,8 +1,9 @@
 ﻿using DAL;
+using Entites;
 using GrpcModelFirst;
 using GrpcModelFirst.Models;
+using Mapster;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -18,19 +19,13 @@ namespace CustomerServiceApp.Impelimentions
             _logger = logger;
         }
 
-        public async Task<AchiveCustomerResultDto> ArchiveCustomer(ArchiveCustomerRequestDto dto)
-        {
-
-            await _storeService.AppendAsync(dto.Email, "");
-        }
 
         public async Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto)
         {
             var result = new CreateCustomerResultDto();
             try
             {
-                var jsondata = JsonConvert.SerializeObject(dto);
-                await _storeService.AppendAsync(dto.Email, jsondata);
+                await _storeService.AppendAsync(dto.Email, dto);
                 result.IsSuccess = true;
             }
             catch (Exception ex)
@@ -43,9 +38,45 @@ namespace CustomerServiceApp.Impelimentions
         }
 
 
+        public async Task<AchiveCustomerResultDto> ArchiveCustomer(ArchiveCustomerRequestDto dto)
+        {
+            var result = new AchiveCustomerResultDto();
+            try
+            {
+                var customer = await _storeService.FetchAsync<Customer>(dto.Email);
+                customer.IsArchived = true;
+                await _storeService.AppendAsync(dto.Email, customer);
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+                result.IsSuccess = false;
+                result.Message = "Customer not Archived To storeDb See The logs";
+                _logger.LogError(ex, "Customer not Archived in storeDb");
+            }
+            return result;
+        }
+
+
         public async Task<UpdateCustomerAddressResultDto> UpdateCustomerAdress(UpdateCustomerAddressRequestDto dto)
         {
-            await _storeService.AppendAsync(dto.Email, "");
+            var result = new UpdateCustomerAddressResultDto();
+            try
+            {
+                var customer = await _storeService.FetchAsync<Customer>(dto.Email);
+                customer.Address = dto.Address.Adapt<Entites.Address>();
+                await _storeService.AppendAsync(dto.Email, customer);
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+                result.IsSuccess = false;
+                result.Message = "Customer not Updated Address To storeDb See The logs";
+                _logger.LogError(ex, "Customer not Updated Address in storeDb");
+            }
+            return result;
         }
     }
 }
