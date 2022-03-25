@@ -6,9 +6,9 @@ using Validators;
 namespace CustomerService.Test
 {
     [TestFixture]
-    public class CreateCustomerValidatorTest
+    public class UpdateCustomerValidatorTest
     {
-        CreateCustomerValidator validator;
+        UpdateCustomerValidator validator;
 
         [SetUp]
         public void Setup()
@@ -19,7 +19,7 @@ namespace CustomerService.Test
         [Test]
         public void Should_have_error_when_Email_is_Null()
         {
-            var model = new CreateCustomerRequestDto { Email = null};
+            var model = new UpdateCustomerAddressRequestDto { Email = null};
             var result = validator.TestValidate(model);
             result.ShouldHaveValidationErrorFor(c => c.Email);
         }
@@ -28,7 +28,7 @@ namespace CustomerService.Test
         [Test]
         public void Should_have_error_when_Email_is_Not_valid()
         {
-            var model = new CreateCustomerRequestDto { Email = "12" };
+            var model = new UpdateCustomerAddressRequestDto { Email = "12" };
             var result = validator.TestValidate(model);
             result.ShouldHaveValidationErrorFor(c => c.Email);
         }
@@ -37,7 +37,7 @@ namespace CustomerService.Test
         [Test]
         public void Should_have_error_when_Street_is_Null()
         {
-            var model = new CreateCustomerRequestDto
+            var model = new UpdateCustomerAddressRequestDto
             {
                 Address = new Address()
             };
@@ -49,7 +49,7 @@ namespace CustomerService.Test
         [Test]
         public void Should_have_error_when_City_is_Null()
         {
-            var model = new CreateCustomerRequestDto
+            var model = new UpdateCustomerAddressRequestDto
             {
                 Address = new Address()
             };
@@ -62,7 +62,7 @@ namespace CustomerService.Test
         [Test]
         public void Should_have_error_when_Counrty_is_Null()
         {
-            var model = new CreateCustomerRequestDto
+            var model = new UpdateCustomerAddressRequestDto
             {
                 Address = new Address()
             };

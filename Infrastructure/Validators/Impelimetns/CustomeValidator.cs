@@ -1,7 +1,5 @@
 ﻿using Models.Dtos;
-using Models.Events;
 using Validators.Extensssion;
-using Validators.Models;
 
 namespace Validators.Impelimetns
 {

@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
 using Models.Dtos;
-using Models.Events;
 
 namespace Validators
 {
@@ -9,6 +8,7 @@ namespace Validators
     {
         public OrderCompletedValidator()
         {
+            RuleFor(c => c.Email).NotNull();
             RuleFor(c => c.Email).EmailAddress(EmailValidationMode.AspNetCoreCompatible);
         }
     }

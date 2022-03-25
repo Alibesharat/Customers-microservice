@@ -2,7 +2,7 @@
 using FluentValidation.Validators;
 using Models.Dtos;
 
-namespace Validators.Models
+namespace Validators
 {
     public class CreateCustomerValidator : AbstractValidator<CreateCustomerRequestDto>
     {

@@ -6,9 +6,9 @@ using Validators;
 namespace CustomerService.Test
 {
     [TestFixture]
-    public class ArchiveCustomerValidatorTest
+    public class GetCustomerValidatorTest
     {
-        ArchiveCustomerValidator validator;
+        GetCustomerValidator validator;
 
         [SetUp]
         public void SetUp()
@@ -20,7 +20,7 @@ namespace CustomerService.Test
         [Test]
         public void Should_have_error_when_Email_is_Null()
         {
-            var model = new ArchiveCustomerRequestDto { Email = null };
+            var model = new GetCustomerRequestDto { Email = null };
             var result = validator.TestValidate(model);
             result.ShouldHaveValidationErrorFor(c => c.Email);
         }
@@ -29,7 +29,7 @@ namespace CustomerService.Test
         [Test]
         public void Should_have_error_when_Email_is_Not_valid()
         {
-            var model = new ArchiveCustomerRequestDto { Email = "" };
+            var model = new GetCustomerRequestDto { Email = "" };
             var result = validator.TestValidate(model);
             result.ShouldHaveValidationErrorFor(c => c.Email);
         }

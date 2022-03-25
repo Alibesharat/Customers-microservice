@@ -2,7 +2,6 @@
 using Models.Dtos;
 using NUnit.Framework;
 using Validators;
-using Validators.Models;
 
 namespace CustomerService.Test
 {
