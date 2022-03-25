@@ -25,10 +25,12 @@ namespace CustomerServiceApp.Impelimentions
             var result = new CreateCustomerResultDto();
             try
             {
+
                 var Customer = new Customer()
                 {
                     CreatedAt = DateTime.Now,
                     Email = dto.Email,
+                    Address = dto.Address.Adapt<Entites.Address>()
                 };
                 await _storeService.AppendAsync(dto.Email, Customer);
                 result.IsSuccess = true;

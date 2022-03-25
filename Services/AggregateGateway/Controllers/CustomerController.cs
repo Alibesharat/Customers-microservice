@@ -1,6 +1,7 @@
 ﻿using Entites;
 using Events;
 using GrpcModelFirst;
+using GrpcModelFirst.Models;
 using MessageBroker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -39,38 +40,29 @@ namespace AggregateGateway.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CustomerCreated customer)
+        public async Task<IActionResult> Add([FromBody] CreatCustomerRequestDto customer)
         {
             //await _sender.SendMessageToCustomerTopic(customer.Email, customer);
             //return Ok("Add Sucess");
 
-           var result= await customerService.CreateCustomer(new GrpcModelFirst.Models.CreatCustomerRequestDto()
-            {
-                Email = "email",
-                Address = new GrpcModelFirst.Models.Address()
-                {
-                    City = "tehran",
-                    Country = "Iran",
-                    Street = "Azadi"
-                }
-            });
-            return Ok(result);
+            var result = await customerService.CreateCustomer(customer);
+            return result.IsSuccess ? Ok() : BadRequest(result.Message);
         }
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] AddressUpdated address)
+        public async Task<IActionResult> UpdateAddressAsync([FromBody] UpdateCustomerAddressRequestDto address)
         {
-            await _sender.SendMessageToCustomerTopic(address.Customer.Email, address);
-            return Ok("Update Sucess");
+            var result = await customerService.UpdateCustomerAdress(address);
+            return result.IsSuccess ? Ok() : BadRequest(result.Message);
         }
 
 
         [HttpPut(nameof(OrderCompleted))]
-        public async Task<IActionResult> OrderCompleted([FromBody] OrderCompleted order)
+        public async Task<IActionResult> ArchiveCustomer([FromBody] ArchiveCustomerRequestDto dto)
         {
-            await _sender.SendMessageToCustomerTopic(order.Email, order);
-            return Ok("Update Sucess");
+            var result = await customerService.ArchiveCustomer(dto);
+            return result.IsSuccess ? Ok() : BadRequest(result.Message);
         }
 
 
