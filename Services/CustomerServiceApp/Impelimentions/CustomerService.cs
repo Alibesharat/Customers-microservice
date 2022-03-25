@@ -118,7 +118,8 @@ namespace CustomerServiceApp.Impelimentions
             try
             {
                 var Customer = await _storeService.FetchAsync<Customer>(dto.Email);
-
+                result = Customer.Adapt<GetCustomerResultDto>();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
