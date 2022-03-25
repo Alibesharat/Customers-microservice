@@ -10,7 +10,7 @@ namespace Validators
         CustomeValidationResult ValidateUpdateCustomer(UpdateCustomerAddressRequestDto updateCustomer);
         CustomeValidationResult ValidateArchiveCustomer(ArchiveCustomerRequestDto archiveCustomer);
         CustomeValidationResult ValidateGetCustomer(GetCustomerRequestDto GetCustomer);
-        CustomeValidationResult ValidateOrderCompleted(OrderCompleted Order);
+        CustomeValidationResult ValidateOrderCompleted(OrderCompleteRequestDto Order);
 
 
 

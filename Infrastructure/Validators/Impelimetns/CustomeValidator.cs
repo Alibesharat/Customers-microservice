@@ -13,7 +13,7 @@ namespace Validators.Impelimetns
             ArchiveCustomerValidator validator = new();
             var validate = validator.Validate(archiveCustomer);
             result.IsValid = validate.IsValid;
-            result.Errors = validate.ErrorsToString();
+            result.Errors = validate.GetErrors();
             return result;
         }
 
@@ -23,7 +23,7 @@ namespace Validators.Impelimetns
             CreateCustomerValidator validator = new();
             var validate = validator.Validate(customer);
             result.IsValid = validate.IsValid;
-            result.Errors = validate.ErrorsToString();
+            result.Errors = validate.GetErrors();
             return result;
 
         }
@@ -34,18 +34,18 @@ namespace Validators.Impelimetns
             GetCustomerValidator validator = new();
             var validate = validator.Validate(GetCustomer);
             result.IsValid = validate.IsValid;
-            result.Errors = validate.ErrorsToString();
+            result.Errors = validate.GetErrors();
             return result;
         }
 
-        public CustomeValidationResult ValidateOrderCompleted(OrderCompleted Order)
+        public CustomeValidationResult ValidateOrderCompleted(OrderCompleteRequestDto Order)
         {
             CustomeValidationResult result = new();
 
             OrderCompletedValidator validator = new();
             var validate = validator.Validate(Order);
             result.IsValid = validate.IsValid;
-            result.Errors = validate.ErrorsToString();
+            result.Errors = validate.GetErrors();
             return result;
         }
 
@@ -55,7 +55,7 @@ namespace Validators.Impelimetns
             UpdateCustomerValidator validator = new();
             var validate = validator.Validate(updateCustomer);
             result.IsValid = validate.IsValid;
-            result.Errors = validate.ErrorsToString();
+            result.Errors = validate.GetErrors();
             return result;
         }
     }

@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
+using Models.Dtos;
 using Models.Events;
 
 namespace Validators
 {
-    public class OrderCompletedValidator : AbstractValidator<OrderCompleted>
+    public class OrderCompletedValidator : AbstractValidator<OrderCompleteRequestDto>
     {
         public OrderCompletedValidator()
         {

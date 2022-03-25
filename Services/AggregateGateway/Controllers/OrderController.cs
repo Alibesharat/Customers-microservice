@@ -1,8 +1,7 @@
 ﻿using GrpcModelFirst;
-using GrpcModelFirst.Models;
-using MessageBroker;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Models.Dtos;
+using Validators;
 
 namespace AggregateGateway.Controllers
 {
@@ -15,16 +14,13 @@ namespace AggregateGateway.Controllers
     {
 
 
-        private readonly ILogger<OrderController> _logger;
-        private readonly IMessageSender _sender;
         IOrderService _OrderService;
+        ICustomeValidator _Validator;
 
-        public OrderController(ILogger<OrderController> logger, IMessageSender sender, IGrpcBaseChannel grpcBaseChannel)
+        public OrderController( IGrpcBaseChannel grpcBaseChannel, ICustomeValidator validator)
         {
-
-            _logger = logger;
-            _sender = sender;
             _OrderService = grpcBaseChannel.GetOrderService();
+            _Validator = validator;
         }
 
 
@@ -39,11 +35,15 @@ namespace AggregateGateway.Controllers
         [HttpPut]
         public IActionResult SetOder([FromBody] OrderCompleteRequestDto dto)
         {
-            //await _sender.SendMessageToCustomerTopic(customer.Email, customer);
-            //return Ok("Add Sucess");
+            var validate = _Validator.ValidateOrderCompleted(dto);
+            if (validate.IsValid)
+            {
+                _OrderService.OrderComplete(dto);
+                return Ok("Mesage Will be sending");
+            }
+         
+            return BadRequest(validate.Errors);
 
-            _OrderService.OrderComplete(dto);
-            return Ok("Mesage Will be sending");
         }
 
 

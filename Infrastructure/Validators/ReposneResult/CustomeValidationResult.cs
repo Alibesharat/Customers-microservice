@@ -1,9 +1,11 @@
-﻿namespace Validators
+﻿using System.Collections.Generic;
+
+namespace Validators
 {
     public class CustomeValidationResult
     {
         public bool IsValid { get; set; }
 
-        public string Errors { get; set; }
+        public List<string> Errors { get; set; }
     }
 }

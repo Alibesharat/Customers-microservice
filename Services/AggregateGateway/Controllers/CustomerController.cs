@@ -1,7 +1,5 @@
 ﻿using GrpcModelFirst;
-using MessageBroker;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Models.Dtos;
 using System.Threading.Tasks;
 using Validators;
@@ -17,16 +15,12 @@ namespace AggregateGateway.Controllers
     {
 
 
-        private readonly ILogger<CustomerController> _logger;
-        private readonly IMessageSender _sender;
         ICustomerService customerService;
         ICustomeValidator _Validator;
 
-        public CustomerController(ILogger<CustomerController> logger, IMessageSender sender, IGrpcBaseChannel grpcBaseChannel, ICustomeValidator validator)
+        public CustomerController(IGrpcBaseChannel grpcBaseChannel, ICustomeValidator validator)
         {
 
-            _logger = logger;
-            _sender = sender;
             customerService = grpcBaseChannel.GetCustomerService();
             _Validator = validator;
         }
@@ -39,38 +33,53 @@ namespace AggregateGateway.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetCustomerRequestDto dto)
         {
-           
-            var result = await customerService.GetCustomer(dto);
-            return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
+            var validate = _Validator.ValidateGetCustomer(dto);
+            if (validate.IsValid)
+            {
+                var result = await customerService.GetCustomer(dto);
+                return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
+            }
+            return BadRequest(validate.Errors);
+
         }
 
 
         /// <summary>
         /// Create New Customer
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreatCustomerRequestDto customer)
+        public async Task<IActionResult> Add([FromBody] CreateCustomerRequestDto dto)
         {
-            //await _sender.SendMessageToCustomerTopic(customer.Email, customer);
-            //return Ok("Add Sucess");
+            var validate = _Validator.ValidateCreateCustomer(dto);
+            if (validate.IsValid)
+            {
+                var result = await customerService.CreateCustomer(dto);
+                return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
+            }
+            return BadRequest(validate.Errors);
 
-            var result = await customerService.CreateCustomer(customer);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
         }
 
 
         /// <summary>
         /// Update Address of Customer
         /// </summary>
-        /// <param name="address"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateAddressAsync([FromBody] UpdateCustomerAddressRequestDto address)
+        public async Task<IActionResult> UpdateAddress([FromBody] UpdateCustomerAddressRequestDto dto)
         {
-            var result = await customerService.UpdateCustomerAdress(address);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
+            var validate = _Validator.ValidateUpdateCustomer(dto);
+            if (validate.IsValid)
+            {
+                var result = await customerService.UpdateCustomerAdress(dto);
+                return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
+            }
+            return BadRequest(validate.Errors);
+
+
         }
 
 
@@ -82,8 +91,15 @@ namespace AggregateGateway.Controllers
         [HttpPut(nameof(ArchiveCustomer))]
         public async Task<IActionResult> ArchiveCustomer([FromBody] ArchiveCustomerRequestDto dto)
         {
-            var result = await customerService.ArchiveCustomer(dto);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
+            var validate = _Validator.ValidateArchiveCustomer(dto);
+            if (validate.IsValid)
+            {
+                var result = await customerService.ArchiveCustomer(dto);
+                return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
+            }
+            return BadRequest(validate.Errors);
+
+
         }
 
 
