@@ -19,7 +19,7 @@ namespace OrderServiceApp
         WebHost.CreateDefaultBuilder(args)
             .ConfigureKestrel(options =>
             {
-                options.ListenLocalhost(10043, listenOptions =>
+                options.ListenAnyIP(10043, listenOptions =>
                 {
                     listenOptions.Protocols = HttpProtocols.Http2;
                 });

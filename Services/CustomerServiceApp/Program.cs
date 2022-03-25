@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
+using System.Net;
 
 namespace CustomerServiceApp
 {
@@ -15,16 +15,19 @@ namespace CustomerServiceApp
 
 
 
-        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .ConfigureKestrel(options =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
             {
-                options.ListenLocalhost(10042, listenOptions =>
+                webBuilder.UseStartup<Startup>().ConfigureKestrel(options =>
                 {
-                    listenOptions.Protocols = HttpProtocols.Http2;
+                    options.Listen(IPAddress.Any, 10042, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                     
+                    });
                 });
-            })
-            .UseStartup<Startup>();
+            });
     }
 
 
