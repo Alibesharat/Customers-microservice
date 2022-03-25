@@ -1,7 +1,7 @@
 ﻿using GrpcModelFirst;
-using GrpcModelFirst.Models;
 using Mapster;
 using MessageBroker;
+using Models.Dtos;
 using Models.Events;
 
 namespace OrderServiceApp.Impelimentions
