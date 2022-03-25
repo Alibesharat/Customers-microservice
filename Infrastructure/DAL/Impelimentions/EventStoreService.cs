@@ -44,7 +44,16 @@ namespace DAl.Impelimentions
 
         public async Task<bool> ISExist(string Key)
         {
-            return await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End).AnyAsync();
+            try
+            {
+                return await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End).AnyAsync();
+
+            }
+            catch
+            {
+
+                return false;
+            }
         }
     }
 }
