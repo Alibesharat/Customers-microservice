@@ -8,6 +8,6 @@ namespace MessageBroker
         public event EventHandler<RawKafkaRecord> MessageRecived;
 
 
-        public void SubscribeToCustomerTopic();
+        public void SubscribeToOrderTopic();
     }
 }

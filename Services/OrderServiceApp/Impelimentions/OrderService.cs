@@ -1,44 +1,26 @@
-﻿using DAL;
-using Entites;
+﻿using Events;
 using GrpcModelFirst;
 using GrpcModelFirst.Models;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+using Mapster;
+using MessageBroker;
 
 namespace OrderServiceApp.Impelimentions
 {
     public class OrderService : IOrderService
     {
-        readonly IStoreService _StoreService;
-        readonly ILogger<OrderService> _logger;
+        readonly IMessageSender _MessageSender;
 
-        public OrderService(IStoreService storeService, ILogger<OrderService> logger)
+        public OrderService(IMessageSender messageSender)
         {
-            _StoreService = storeService;
-            _logger = logger;
+            _MessageSender = messageSender;
         }
 
 
 
-        public async Task<OrderCompleteResultDto> OrderComplete(OrderCompleteRequestDto dto)
+        public void OrderComplete(OrderCompleteRequestDto dto)
         {
-            var result = new OrderCompleteResultDto();
-            try
-            {
-                var customer = await _StoreService.FetchAsync<Customer>(dto.Email);
-                customer.PurchasedAt= DateTime.Now;
-                await _StoreService.AppendAsync(dto.Email, customer);
-                result.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-
-                result.IsSuccess = false;
-                result.Message = "Order not Complete See The logs";
-                _logger.LogError(ex, "Customer not set PurchasedAt  in storeDb");
-            }
-            return result;
+            var OrderEvent = dto.Adapt<OrderCompleted>();
+            _MessageSender.SendMessageToOrderTopic(dto.Email, OrderEvent);
         }
     }
 }

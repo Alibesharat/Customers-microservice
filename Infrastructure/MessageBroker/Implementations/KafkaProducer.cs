@@ -57,13 +57,13 @@ namespace MessageBroker
         }
 
 
-        public async Task SendMessageToCustomerTopic(string Key, Event message)
+        public async Task SendMessageToOrderTopic(string Key, OrderCompleted message)
         {
 
             var json = JsonConvert.SerializeObject(message);
             using (var producer = new ProducerBuilder<string, string>(_producerConfig).Build())
             {
-                var result = await producer.ProduceAsync("Customer", new Message<string, string> { Key = Key, Value = json });
+                var result = await producer.ProduceAsync("Order", new Message<string, string> { Key = Key, Value = json });
                 _logger.LogInformation($"Your Message  is queued at offset { result.Offset.Value} in the Topic { result.Topic}");
             };
 

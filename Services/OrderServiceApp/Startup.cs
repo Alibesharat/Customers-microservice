@@ -20,8 +20,6 @@ namespace OrderServiceApp
         {
 
             services.AddMessageSender();
-            services.AddMessegeReciver();
-            services.AddStoreService();
             services.AddGrpcServer();
             services.AddLogging();
         }

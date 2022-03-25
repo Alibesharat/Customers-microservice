@@ -18,10 +18,10 @@ namespace MessageBroker
             _logger = logger;
         }
 
-        public void SubscribeToCustomerTopic()
+        public void SubscribeToOrderTopic()
         {
             //_Cluster.ConsumeFromEarliest("Customer");
-            _Cluster.Subscribe("ConsumerGroup", new[] { "Customer"},new ConsumerGroupConfiguration());
+            _Cluster.Subscribe("ConsumerGroup", new[] { "Order"},new ConsumerGroupConfiguration());
             _Cluster.MessageReceived += Cluster_MessageReceived;
 
         }

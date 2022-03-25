@@ -1,9 +1,12 @@
 ﻿using DAL;
 using Entites;
+using Events;
 using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using Mapster;
+using MessageBroker;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -13,11 +16,14 @@ namespace CustomerServiceApp.Impelimentions
     {
         IStoreService _storeService;
         ILogger<CustomerService> _logger;
-        public CustomerService(IStoreService storeService, ILogger<CustomerService> logger)
+        public CustomerService(IStoreService storeService, ILogger<CustomerService> logger, IMessageReciver messageReciver)
         {
             _storeService = storeService;
             _logger = logger;
+            messageReciver.SubscribeToOrderTopic();
+            messageReciver.MessageRecived += OrderMessageRecived;
         }
+
 
 
         public async Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto)
@@ -85,5 +91,28 @@ namespace CustomerServiceApp.Impelimentions
             }
             return result;
         }
+
+
+
+
+        private async Task OrderMessageRecived(object sender, Kafka.Public.RawKafkaRecord e)
+        {
+
+           
+            try
+            {
+                var customer = await _storeService.FetchAsync<Customer>(e.GetKey());
+                customer.PurchasedAt = DateTime.Now;
+                await _storeService.AppendAsync(customer.Email, customer);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, " Order not Purchesed  ");
+            }
+
+        }
+
+
+
     }
 }

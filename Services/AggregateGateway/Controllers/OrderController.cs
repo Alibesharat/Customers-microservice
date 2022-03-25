@@ -1,10 +1,8 @@
-﻿using Events;
-using GrpcModelFirst;
+﻿using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using MessageBroker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
 namespace AggregateGateway.Controllers
 {
@@ -30,24 +28,24 @@ namespace AggregateGateway.Controllers
         }
 
 
-       
+
 
 
 
         [HttpPut]
-        public async Task<IActionResult> SetOder([FromBody] OrderCompleteRequestDto dto)
+        public IActionResult SetOder([FromBody] OrderCompleteRequestDto dto)
         {
             //await _sender.SendMessageToCustomerTopic(customer.Email, customer);
             //return Ok("Add Sucess");
 
-            var result = await _OrderService.OrderComplete(dto);
-            return result.IsSuccess ? Ok() : BadRequest(result.Message);
+            _OrderService.OrderComplete(dto);
+            return Ok("Mesage Will be sending");
         }
 
 
-       
 
-       
+
+
 
 
     }

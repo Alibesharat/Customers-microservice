@@ -9,6 +9,6 @@ namespace MessageBroker
         Task CreateTopicAsync(string Name);
 
 
-        Task SendMessageToCustomerTopic(string Key,Event Message);
+        Task SendMessageToOrderTopic(string Key,OrderCompleted Message);
     }
 }
