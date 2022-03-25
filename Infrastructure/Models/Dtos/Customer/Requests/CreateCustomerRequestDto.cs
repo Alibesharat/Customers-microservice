@@ -6,6 +6,10 @@ namespace Models.Dtos
 
     public class CreateCustomerRequestDto
     {
+        public CreateCustomerRequestDto()
+        {
+            Address = new Address();
+        }
 
         [DataMember(Order = 1)]
         public string Email { get; set; }
