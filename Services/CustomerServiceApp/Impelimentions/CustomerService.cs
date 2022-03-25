@@ -29,7 +29,12 @@ namespace CustomerServiceApp.Impelimentions
             var result = new CreateCustomerResultDto();
             try
             {
-
+                if (await _storeService.ISExist(dto.Email))
+                {
+                    result.IsSuccess = false;
+                    result.Message = "The Email is already Exist";
+                    return result;
+                }
                 var Customer = new Customer()
                 {
                     CreatedAt = DateTime.Now,
@@ -55,7 +60,16 @@ namespace CustomerServiceApp.Impelimentions
             var result = new AchiveCustomerResultDto();
             try
             {
+                
                 var customer = await _storeService.FetchAsync<Customer>(dto.Email);
+
+                if (customer==null)
+                {
+                    result.IsSuccess = false;
+                    result.Message = "The Email is Not Exist";
+                    return result;
+                }
+
                 customer.IsArchived = true;
                 await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
@@ -78,7 +92,15 @@ namespace CustomerServiceApp.Impelimentions
             var result = new UpdateCustomerAddressResultDto();
             try
             {
+               
                 var customer = await _storeService.FetchAsync<Customer>(dto.Email);
+
+                if (customer == null)
+                {
+                    result.Message = "The Email is not Exist";
+                    result.IsSuccess = false;
+                    return result;
+                }
                 customer.Address = dto.Address.Adapt<Entites.Address>();
                 await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
@@ -104,10 +126,18 @@ namespace CustomerServiceApp.Impelimentions
 
             try
             {
+
                 _logger.LogInformation($"Order recived {e.GetKey()}");
+
+
+
                 var customer = await _storeService.FetchAsync<Customer>(e.GetKey());
-                customer.PurchasedAt = DateTime.Now;
-                await _storeService.AppendAsync(customer.Email, customer);
+                if (customer != null)
+                {
+                    customer.PurchasedAt = DateTime.Now;
+                    await _storeService.AppendAsync(customer.Email, customer);
+
+                }
 
             }
             catch (Exception ex)

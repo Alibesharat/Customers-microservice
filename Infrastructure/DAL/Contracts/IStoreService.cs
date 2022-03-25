@@ -11,5 +11,8 @@ namespace DAL
         Task<T> FetchAsync<T>(string Key);
 
 
+        Task<bool> ISExist(string Key);
+
+
     }
 }

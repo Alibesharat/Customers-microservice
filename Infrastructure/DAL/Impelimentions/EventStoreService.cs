@@ -42,6 +42,9 @@ namespace DAl.Impelimentions
             return JsonConvert.DeserializeObject<T>(jsondata);
         }
 
-
+        public async Task<bool> ISExist(string Key)
+        {
+            return await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End).AnyAsync();
+        }
     }
 }
