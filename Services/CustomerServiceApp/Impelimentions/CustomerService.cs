@@ -134,7 +134,7 @@ namespace CustomerServiceApp.Impelimentions
 
 
                 var customer = await _storeService.FetchAsync<Customer>(e.GetKey());
-                if (customer != null)
+                if (customer != null && customer.PurchasedAt==null)
                 {
                     customer.PurchasedAt = DateTime.Now.ToUniversalTime();
                     await _storeService.AppendAsync(customer.Email, customer);
