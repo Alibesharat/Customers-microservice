@@ -3,9 +3,7 @@
 namespace GrpcModelFirst.Models
 {
     [DataContract]
-    public class CreateCustomerResultDto
+    public class CreateCustomerResultDto : BaseResult
     {
-        [DataMember(Order = 1)]
-        public BaseResult BaseResult { get; set; }
     }
 }

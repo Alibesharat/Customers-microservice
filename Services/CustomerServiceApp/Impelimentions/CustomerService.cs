@@ -37,14 +37,14 @@ namespace CustomerServiceApp.Impelimentions
                     Address = dto.Address.Adapt<Entites.Address>()
                 };
                 await _storeService.AppendAsync(dto.Email, Customer);
-                result.BaseResult.IsSuccess = true;
-                result.BaseResult.Message = "Customer Created Successfully";
+                result.IsSuccess = true;
+                result.Message = "Customer Created Successfully";
             }
             catch (Exception ex)
             {
-                result.BaseResult.IsSuccess = false;
-                result.BaseResult.Message = "Customer not Added ";
-                _logger.LogError(ex, result.BaseResult.Message);
+                result.IsSuccess = false;
+                result.Message = "Customer not Added ";
+                _logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -58,16 +58,16 @@ namespace CustomerServiceApp.Impelimentions
                 var customer = await _storeService.FetchAsync<Customer>(dto.Email);
                 customer.IsArchived = true;
                 await _storeService.AppendAsync(dto.Email, customer);
-                result.BaseResult.IsSuccess = true;
-                result.BaseResult.Message = "Customer Archived Successfully";
+                result.IsSuccess = true;
+                result.Message = "Customer Archived Successfully";
 
             }
             catch (Exception ex)
             {
 
-                result.BaseResult.IsSuccess = false;
-                result.BaseResult.Message = "Customer not Archived";
-                _logger.LogError(ex, result.BaseResult.Message);
+                result.IsSuccess = false;
+                result.Message = "Customer not Archived";
+                _logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -81,16 +81,16 @@ namespace CustomerServiceApp.Impelimentions
                 var customer = await _storeService.FetchAsync<Customer>(dto.Email);
                 customer.Address = dto.Address.Adapt<Entites.Address>();
                 await _storeService.AppendAsync(dto.Email, customer);
-                result.BaseResult.IsSuccess = true;
-                result.BaseResult.Message = "Customer Address Updated Successfully";
+                result.IsSuccess = true;
+                result.Message = "Customer Address Updated Successfully";
 
             }
             catch (Exception ex)
             {
 
-                result.BaseResult.IsSuccess = false;
-                result.BaseResult.Message = "Customer not Updated Addres";
-                _logger.LogError(ex, result.BaseResult.Message);
+                result.IsSuccess = false;
+                result.Message = "Customer not Updated Addres";
+                _logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -124,13 +124,13 @@ namespace CustomerServiceApp.Impelimentions
             {
                 var Customer = await _storeService.FetchAsync<Customer>(dto.Email);
                 result = Customer.Adapt<GetCustomerResultDto>();
-                result.BaseResult.IsSuccess = true;
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
-                result.BaseResult.IsSuccess = false;
-                result.BaseResult.Message = "Fetch Data from Store is faced a problem ";
-                _logger.LogError(ex, result.BaseResult.Message);
+                result.IsSuccess = false;
+                result.Message = "Fetch Data from Store is faced a problem ";
+                _logger.LogError(ex, result.Message);
             }
             return result;
         }
