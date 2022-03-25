@@ -15,3 +15,7 @@ OrderServiceApp Host url : http://localhost:10043
 Api/Swagger : http://localhost:5000/
 
 
+ Docker build -f ./Services/CustomerServiceApp/Dockerfile  -t customer:latest .
+ Docker build -f ./Services/OrderServiceApp/Dockerfile  -t order:latest .
+ Docker build -f ./Services/AggregateGateway/Dockerfile  -t api:latest .
+
