@@ -3,12 +3,12 @@
 namespace GrpcModelFirst.Models
 {
     [DataContract]
-    public class BaseResult
+    public abstract class BaseResult
     {
-        [DataMember(Order = 1)]
+        [DataMember]
         public bool IsSuccess { get; set; }
 
-        [DataMember(Order = 2)]
+        [DataMember]
 
         public string Message { get; set; }
     }

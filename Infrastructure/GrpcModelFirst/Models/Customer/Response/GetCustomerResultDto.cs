@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace GrpcModelFirst.Models
 {
     [DataContract]
-    public class GetCustomerResultDto: BaseResult
+    public class GetCustomerResultDto
     {
 
         [DataMember(Order = 1)]
@@ -26,5 +26,9 @@ namespace GrpcModelFirst.Models
         [DataMember(Order = 5)]
 
         public DateTime PurchasedAt { get; set; }
+
+        [DataMember(Order = 6)]
+
+        public BaseResult BaseResult { get; set; }
     }
 }
