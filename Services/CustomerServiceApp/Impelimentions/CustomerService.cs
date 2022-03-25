@@ -25,7 +25,12 @@ namespace CustomerServiceApp.Impelimentions
             var result = new CreateCustomerResultDto();
             try
             {
-                await _storeService.AppendAsync(dto.Email, dto);
+                var Customer = new Customer()
+                {
+                    CreatedAt = DateTime.Now,
+                    Email = dto.Email,
+                };
+                await _storeService.AppendAsync(dto.Email, Customer);
                 result.IsSuccess = true;
             }
             catch (Exception ex)
