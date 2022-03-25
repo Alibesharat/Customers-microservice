@@ -16,7 +16,7 @@ namespace DAl.Impelimentions
             client = new EventStoreClient(settings);
         }
 
-        public async Task Append(string Key, string @event)
+        public async Task AppendAsync(string Key, string @event)
         {
 
             var eventData = new EventData(
@@ -29,11 +29,11 @@ namespace DAl.Impelimentions
            Key,
             StreamState.Any,
             new[] { eventData });
-
+           
 
         }
 
-        public async Task<string> Fetch(string Key)
+        public async Task<string> FetchAsync(string Key)
         {
             var result =await client.ReadStreamAsync(Direction.Backwards, Key, StreamPosition.End, 1).LastAsync();
             return Encoding.UTF8.GetString(result.Event.Data.ToArray());

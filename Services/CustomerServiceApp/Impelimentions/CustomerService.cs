@@ -1,5 +1,8 @@
-﻿using GrpcModelFirst;
+﻿using DAL;
+using GrpcModelFirst;
 using GrpcModelFirst.Models;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -7,22 +10,42 @@ namespace CustomerServiceApp.Impelimentions
 {
     public class CustomerService : ICustomerService
     {
-
-       
-       
-        public Task<AchiveCustomerResultDto> ArchiveCustomer(ArchiveCustomerRequestDto dto)
+        IStoreService _storeService;
+        ILogger<CustomerService> _logger;
+        public CustomerService(IStoreService storeService, ILogger<CustomerService> logger)
         {
-            throw new NotImplementedException();
+            _storeService = storeService;
+            _logger = logger;
         }
 
-        public Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto)
+        public async Task<AchiveCustomerResultDto> ArchiveCustomer(ArchiveCustomerRequestDto dto)
         {
-            throw new NotImplementedException();
+
+            await _storeService.AppendAsync(dto.Email, "");
         }
 
-        public Task<UpdateCustomerAddressResultDto> UpdateCustomerAdress(UpdateCustomerAddressRequestDto dto)
+        public async Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto)
         {
-            throw new NotImplementedException();
+            var result = new CreateCustomerResultDto();
+            try
+            {
+                var jsondata = JsonConvert.SerializeObject(dto);
+                await _storeService.AppendAsync(dto.Email, jsondata);
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Message = "Customer not Added To storeDb See The logs";
+                _logger.LogError(ex, "Customer not Added To storeDb");
+            }
+            return result;
+        }
+
+
+        public async Task<UpdateCustomerAddressResultDto> UpdateCustomerAdress(UpdateCustomerAddressRequestDto dto)
+        {
+            await _storeService.AppendAsync(dto.Email, "");
         }
     }
 }
