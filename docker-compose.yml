@@ -41,18 +41,6 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper-server
-  schema-registry:
-    image: confluentinc/cp-schema-registry:latest
-    networks:
-      - mynet
-    ports:
-      - 8081:8081
-    environment:
-      - SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka-server:29092
-      - SCHEMA_REGISTRY_HOST_NAME=localhost
-      - SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8081
-    depends_on:
-      - kafka-server
 
   eventstore.db:
     image: eventstore/eventstore:20.10.2-buster-slim

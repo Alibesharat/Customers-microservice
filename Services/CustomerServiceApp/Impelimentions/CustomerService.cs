@@ -12,12 +12,12 @@ namespace CustomerServiceApp.Impelimentions
 {
     public class CustomerService : ICustomerService
     {
-        IStoreService _storeService;
-        ILogger<CustomerService> _logger;
+        IStoreService _StoreService;
+        ILogger<CustomerService> _Logger;
         public CustomerService(IStoreService storeService, ILogger<CustomerService> logger, IMessageReciver messageReciver)
         {
-            _storeService = storeService;
-            _logger = logger;
+            _StoreService = storeService;
+            _Logger = logger;
             messageReciver.SubscribeToOrderTopic();
             messageReciver.MessageRecived += OrderMessageRecived;
         }
@@ -29,7 +29,7 @@ namespace CustomerServiceApp.Impelimentions
             var result = new CreateCustomerResultDto();
             try
             {
-                if (await _storeService.ISExist(dto.Email))
+                if (await _StoreService.ISExist(dto.Email))
                 {
                     result.IsSuccess = false;
                     result.Message = "The Email is already Exist";
@@ -43,7 +43,7 @@ namespace CustomerServiceApp.Impelimentions
                 };
 
              
-                await _storeService.AppendAsync(dto.Email, customer);
+                await _StoreService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Created Successfully";
             }
@@ -51,7 +51,7 @@ namespace CustomerServiceApp.Impelimentions
             {
                 result.IsSuccess = false;
                 result.Message = "Customer not Added ";
-                _logger.LogError(ex, result.Message);
+                _Logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -63,7 +63,7 @@ namespace CustomerServiceApp.Impelimentions
             try
             {
 
-                var customer = await _storeService.FetchAsync<Customer>(dto.Email);
+                var customer = await _StoreService.FetchAsync<Customer>(dto.Email);
 
                 if (customer == null)
                 {
@@ -73,7 +73,7 @@ namespace CustomerServiceApp.Impelimentions
                 }
 
                 customer.IsArchived = true;
-                await _storeService.AppendAsync(dto.Email, customer);
+                await _StoreService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Archived Successfully";
 
@@ -83,7 +83,7 @@ namespace CustomerServiceApp.Impelimentions
 
                 result.IsSuccess = false;
                 result.Message = "Customer not Archived";
-                _logger.LogError(ex, result.Message);
+                _Logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -95,7 +95,7 @@ namespace CustomerServiceApp.Impelimentions
             try
             {
 
-                var customer = await _storeService.FetchAsync<Customer>(dto.Email);
+                var customer = await _StoreService.FetchAsync<Customer>(dto.Email);
 
                 if (customer == null)
                 {
@@ -104,7 +104,7 @@ namespace CustomerServiceApp.Impelimentions
                     return result;
                 }
                 customer.Address = dto.Address.Adapt<Models.Entites.Address>();
-                await _storeService.AppendAsync(dto.Email, customer);
+                await _StoreService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Address Updated Successfully";
 
@@ -114,7 +114,7 @@ namespace CustomerServiceApp.Impelimentions
 
                 result.IsSuccess = false;
                 result.Message = "Customer not Updated Addres";
-                _logger.LogError(ex, result.Message);
+                _Logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -129,22 +129,22 @@ namespace CustomerServiceApp.Impelimentions
             try
             {
 
-                _logger.LogInformation($"Order recived {e.GetKey()}");
+                _Logger.LogInformation($"Order recived {e.GetKey()}");
 
 
 
-                var customer = await _storeService.FetchAsync<Customer>(e.GetKey());
+                var customer = await _StoreService.FetchAsync<Customer>(e.GetKey());
                 if (customer != null && customer.PurchasedAt==null)
                 {
                     customer.PurchasedAt = DateTime.Now.ToUniversalTime();
-                    await _storeService.AppendAsync(customer.Email, customer);
+                    await _StoreService.AppendAsync(customer.Email, customer);
 
                 }
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, " Order not Purchesed  ");
+                _Logger.LogError(ex, " Order not Purchesed  ");
             }
 
         }
@@ -154,7 +154,7 @@ namespace CustomerServiceApp.Impelimentions
             GetCustomerResultDto result = new();
             try
             {
-                var Customer = await _storeService.FetchAsync<Customer>(dto.Email);
+                var Customer = await _StoreService.FetchAsync<Customer>(dto.Email);
                 result = Customer.Adapt<GetCustomerResultDto>();
                 result.IsSuccess = true;
             }
@@ -162,7 +162,7 @@ namespace CustomerServiceApp.Impelimentions
             {
                 result.IsSuccess = false;
                 result.Message = "Fetch Data from Store is faced a problem ";
-                _logger.LogError(ex, result.Message);
+                _Logger.LogError(ex, result.Message);
             }
             return result;
         }

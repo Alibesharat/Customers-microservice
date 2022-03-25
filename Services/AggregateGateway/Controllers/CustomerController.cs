@@ -15,13 +15,13 @@ namespace AggregateGateway.Controllers
     {
 
 
-        ICustomerService customerService;
+        ICustomerService _CustomerService;
         ICustomeValidator _Validator;
 
         public CustomerController(IGrpcBaseChannel grpcBaseChannel, ICustomeValidator validator)
         {
 
-            customerService = grpcBaseChannel.GetCustomerService();
+            _CustomerService = grpcBaseChannel.GetCustomerService();
             _Validator = validator;
         }
 
@@ -36,7 +36,7 @@ namespace AggregateGateway.Controllers
             var validate = _Validator.ValidateGetCustomer(dto);
             if (validate.IsValid)
             {
-                var result = await customerService.GetCustomer(dto);
+                var result = await _CustomerService.GetCustomer(dto);
                 return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
             }
             return BadRequest(validate.Errors);
@@ -55,7 +55,7 @@ namespace AggregateGateway.Controllers
             var validate = _Validator.ValidateCreateCustomer(dto);
             if (validate.IsValid)
             {
-                var result = await customerService.CreateCustomer(dto);
+                var result = await _CustomerService.CreateCustomer(dto);
                 return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
             }
             return BadRequest(validate.Errors);
@@ -74,7 +74,7 @@ namespace AggregateGateway.Controllers
             var validate = _Validator.ValidateUpdateCustomer(dto);
             if (validate.IsValid)
             {
-                var result = await customerService.UpdateCustomerAdress(dto);
+                var result = await _CustomerService.UpdateCustomerAdress(dto);
                 return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
             }
             return BadRequest(validate.Errors);
@@ -94,7 +94,7 @@ namespace AggregateGateway.Controllers
             var validate = _Validator.ValidateArchiveCustomer(dto);
             if (validate.IsValid)
             {
-                var result = await customerService.ArchiveCustomer(dto);
+                var result = await _CustomerService.ArchiveCustomer(dto);
                 return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
             }
             return BadRequest(validate.Errors);
