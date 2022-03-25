@@ -1,12 +1,10 @@
 ﻿using DAL;
 using Entites;
-using Events;
 using GrpcModelFirst;
 using GrpcModelFirst.Models;
 using Mapster;
 using MessageBroker;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -44,8 +42,8 @@ namespace CustomerServiceApp.Impelimentions
             catch (Exception ex)
             {
                 result.IsSuccess = false;
-                result.Message = "Customer not Added To storeDb See The logs";
-                _logger.LogError(ex, "Customer not Added To storeDb");
+                result.Message = "Customer not Added ";
+                _logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -65,8 +63,8 @@ namespace CustomerServiceApp.Impelimentions
             {
 
                 result.IsSuccess = false;
-                result.Message = "Customer not Archived To storeDb See The logs";
-                _logger.LogError(ex, "Customer not Archived in storeDb");
+                result.Message = "Customer not Archived";
+                _logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -86,8 +84,8 @@ namespace CustomerServiceApp.Impelimentions
             {
 
                 result.IsSuccess = false;
-                result.Message = "Customer not Updated Address To storeDb See The logs";
-                _logger.LogError(ex, "Customer not Updated Address in storeDb");
+                result.Message = "Customer not Updated Addres";
+                _logger.LogError(ex, result.Message);
             }
             return result;
         }
@@ -101,9 +99,11 @@ namespace CustomerServiceApp.Impelimentions
 
             try
             {
+                _logger.LogInformation($"Order recived {e.GetKey()}");
                 var customer = await _storeService.FetchAsync<Customer>(e.GetKey());
                 customer.PurchasedAt = DateTime.Now;
                 await _storeService.AppendAsync(customer.Email, customer);
+
             }
             catch (Exception ex)
             {
@@ -112,7 +112,21 @@ namespace CustomerServiceApp.Impelimentions
 
         }
 
+        public async Task<GetCustomerResultDto> GetCustomer(GetCustomerRequestDto dto)
+        {
+            GetCustomerResultDto result = new();
+            try
+            {
+                var Customer = await _storeService.FetchAsync<Customer>(dto.Email);
 
-
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Message = "Fetch Data from Store is faced a problem ";
+                _logger.LogError(ex, result.Message);
+            }
+            return result;
+        }
     }
 }
