@@ -1,15 +1,12 @@
 ﻿using DAL;
-using FluentValidation.Results;
 using GrpcModelFirst;
-using GrpcModelFirst.Models;
 using Mapster;
 using MessageBroker;
 using Microsoft.Extensions.Logging;
+using Models.Dtos;
 using Models.Entites;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Validators;
 
 namespace CustomerServiceApp.Impelimentions
 {
@@ -17,19 +14,17 @@ namespace CustomerServiceApp.Impelimentions
     {
         IStoreService _storeService;
         ILogger<CustomerService> _logger;
-        ICustomeValidator _Validator;
-        public CustomerService(IStoreService storeService, ILogger<CustomerService> logger, IMessageReciver messageReciver, ICustomeValidator validator)
+        public CustomerService(IStoreService storeService, ILogger<CustomerService> logger, IMessageReciver messageReciver)
         {
             _storeService = storeService;
             _logger = logger;
-            _Validator = validator;
             messageReciver.SubscribeToOrderTopic();
             messageReciver.MessageRecived += OrderMessageRecived;
         }
 
 
 
-        public async Task<CreateCustomerResultDto> CreateCustomer(CreatCustomerRequestDto dto)
+        public async Task<CreateCustomerResultDto> CreateCustomer(CreateCustomerRequestDto dto)
         {
             var result = new CreateCustomerResultDto();
             try
@@ -47,16 +42,7 @@ namespace CustomerServiceApp.Impelimentions
                     Address = dto.Address.Adapt<Models.Entites.Address>()
                 };
 
-                var validationresult = _Validator.ValidateCustomer(customer);
-                if (!validationresult.IsValid)
-                {
-                    result.IsSuccess = false;
-                    result.Message = validationresult.Errors;
-                    return result;
-                }
-
-
-
+             
                 await _storeService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Created Successfully";
