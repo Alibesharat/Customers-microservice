@@ -17,10 +17,4 @@ jobs:
     - name: Build the Docker image
       run:  docker build -f ./Services/AggregateGateway/Dockerfile   --tag api:$(date +%s) .
     
-    - name: Push to Docker hub
-      uses: docker/build-push-action@v2
-      with:
-        username: ${{ Secrets.DOCKER_USERNAME }}
-        password: ${{ Secrets.DOCKER_PASSWORD}}
-        repository: api
-        tags: latest
+   
