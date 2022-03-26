@@ -1,6 +1,7 @@
+# Implements Microservice and Event Sourcing in Asp.net 5
 
+ ## Technologies
 
-###Implements Microservice and Event Sourcing of Customer Service App
 
 |                |                       |
 |------------------------|-------------------------------|
@@ -16,14 +17,26 @@
 |`integrationTest`|Xunit,[Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing)
 
                    
+### How to Run
+> **Note:** Enusre  your **Docker**  is Update To Date .
+
+
+> *We have to build  **local images** on **docker**  , go to **root folder** and run the Following Commands* : 
 
 
 
-Enusre docker is uptodate
+    docker build -f ./Services/CustomerServiceApp/Dockerfile  -t customer:latest .
+    docker build -f ./Services/OrderServiceApp/Dockerfile  -t order:latest .
+    docker build -f ./Services/AggregateGateway/Dockerfile  -t api:latest .
 
-Run docker-compose up 
+>*Run the following command to setup whole Applications and dependencies*
 
-Monitoring/Dashbord : 
+    docker-compose up 
+
+
+
+
+Monitoring/Dashbords : 
 
 kafka :    http://localhost:9000/
 
@@ -35,8 +48,6 @@ OrderServiceApp Host url : http://localhost:10043
 Api/Swagger : http://localhost:4835/
 
 
- Docker build -f ./Services/CustomerServiceApp/Dockerfile  -t customer:latest .
- Docker build -f ./Services/OrderServiceApp/Dockerfile  -t order:latest .
- Docker build -f ./Services/AggregateGateway/Dockerfile  -t api:latest .
+
 
 
