@@ -21,6 +21,6 @@ Api/Swagger : http://localhost:5000/
 
 
 
-  docker run --name api --network mynet  -p 4835:80 api
-  docker run --name customer --network mynet   customer
-  docker run --name order --network mynet   order
+  docker run --name api --network customers-microservice_mynet  -p 4835:80 api
+  docker run --name customer --network customers-microservice_mynet   customer
+  docker run --name order --network customers-microservice_mynet   order

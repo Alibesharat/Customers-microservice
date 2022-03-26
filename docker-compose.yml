@@ -2,9 +2,27 @@ version: "2"
 
 networks:
   mynet:
-    driver: bridge
+    driver: host
 
 services:
+  api:
+   image: api:latest
+   networks:
+    - mynet
+   ports:
+     - 4835:80
+
+  customer:
+   image: customer:latest
+   networks:
+    - mynet
+   
+  order:
+   image: order:latest
+   networks:
+    - mynet
+
+
   zookeeper-server:
     image: bitnami/zookeeper:latest
     networks:
