@@ -20,7 +20,7 @@ jobs:
     - name: Push to Docker hub
       uses: docker/build-push-action@v1
       with:
-        username: ${{ secrets.Docker_UserName }}
-        password: ${{secrets.Docker_Password}}
+        username: ${{ Secrets.DOCKER_USERNAME }}
+        password: ${{ Secrets.DOCKER_PASSWORD}}
         repository: Customers-microservice/Services/AggregateGateway
         tags: api:$(date +%s)
