@@ -1,6 +1,8 @@
 ﻿using Confluent.Kafka;
 using Confluent.Kafka.Admin;
+using MessageBroker.Options;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Models.Events;
 using Newtonsoft.Json;
 using System;
@@ -17,9 +19,10 @@ namespace MessageBroker
         AdminClientConfig _adminConfig;
         ProducerConfig _producerConfig;
         ILogger<KafkaProducer> _logger;
-        public KafkaProducer(ILogger<KafkaProducer> logger)
+
+        public KafkaProducer(ILogger<KafkaProducer> logger,IOptions<KafkaSettings> options)
         {
-            setup();
+            setup(options.Value);
             _logger = logger;
 
         }
@@ -71,15 +74,13 @@ namespace MessageBroker
 
 
 
-        private void setup()
+        private void setup(KafkaSettings settings)
         {
-            //TODO : Config Should Read from AppSettings.Json I just hard Coded for demo 
-            string Servers = "localhost:9092";
             _adminConfig = new AdminClientConfig
-            { BootstrapServers = Servers };
+            { BootstrapServers = settings.Servers };
             _producerConfig = new ProducerConfig
             {
-                BootstrapServers = Servers,
+                BootstrapServers = settings.Servers,
                 // Guarantees delivery of message to topic.
                 EnableDeliveryReports = true,
                 EnableIdempotence=true,

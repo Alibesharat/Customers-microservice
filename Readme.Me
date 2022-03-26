@@ -20,7 +20,3 @@ Api/Swagger : http://localhost:5000/
  Docker build -f ./Services/AggregateGateway/Dockerfile  -t api:latest .
 
 
-
-  docker run --name api --network customers-microservice_mynet  -p 4835:80 api
-  docker run --name customer --network customers-microservice_mynet   customer
-  docker run --name order --network customers-microservice_mynet   order

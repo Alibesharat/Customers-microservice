@@ -1,6 +1,8 @@
 ﻿using Kafka.Public;
 using Kafka.Public.Loggers;
+using MessageBroker.Options;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace MessageBroker
@@ -12,9 +14,9 @@ namespace MessageBroker
 
         public event EventHandler<RawKafkaRecord> MessageRecived;
 
-        public KafkaReciver(ILogger<KafkaReciver> logger)
+        public KafkaReciver(ILogger<KafkaReciver> logger,IOptions<KafkaSettings> options)
         {
-            Setup();
+            Setup(options.Value);
             _logger = logger;
         }
 
@@ -32,13 +34,11 @@ namespace MessageBroker
             _logger.LogInformation("Message recived");
         }
 
-        private void Setup()
+        private void Setup(KafkaSettings settings)
         {
-            string Servers = "localhost:9092";
-
             _Cluster = new ClusterClient(new Configuration()
             {
-                Seeds = Servers,
+                Seeds = settings.Servers,
                
                 
             }, new ConsoleLogger());
