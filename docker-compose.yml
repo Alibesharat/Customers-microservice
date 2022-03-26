@@ -1,36 +1,43 @@
 version: "2"
 
 networks:
-  mynet:
+  csn:
     driver: bridge
 
 services:
   api:
    image: api:latest
    networks:
-    - mynet
+    - csn
    ports:
      - 4835:80
    environment:
      ASPNETCORE_ENVIRONMENT: Production 
+   depends_on:
+      - order
+      - customer
 
   customer:
    image: customer:latest
    networks:
-    - mynet
+    - csn
    environment:
      ASPNETCORE_ENVIRONMENT: Production 
+   depends_on:
+      - eventstore.db
   order:
    image: order:latest
    networks:
-    - mynet
+    - csn
    environment:
      ASPNETCORE_ENVIRONMENT: Production 
+   depends_on:
+      - kafdrop
 
   zookeeper-server:
     image: bitnami/zookeeper:latest
     networks:
-      - mynet
+      - csn
     ports:
       - 2181:2181
     environment:
@@ -38,20 +45,19 @@ services:
   kafdrop:
     image: obsidiandynamics/kafdrop
     networks:
-      - mynet
+      - csn
     restart: "no"
     ports:
       - 9000:9000
     environment:
       KAFKA_BROKERCONNECT: PLAINTEXT://kafka-server:29092
       JVM_OPTS: -Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify
-      SCHEMAREGISTRY_CONNECT: http://schema-registry:8081
     depends_on:
       - kafka-server
   kafka-server:
     image: bitnami/kafka:latest
     networks:
-      - mynet
+      - csn
     ports:
       - 9092:9092
     environment:
@@ -79,7 +85,7 @@ services:
       - "1113:1113"
       - "2113:2113"
     networks:
-      - mynet
+      - csn
     volumes:
       - type: volume
         source: eventstore-volume-data
