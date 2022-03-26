@@ -36,18 +36,12 @@
 
 
 
-Monitoring/Dashbords : 
+## Monitoring/Dashbords : 
 
-kafka :    http://localhost:9000/
-
-EventStoreDb: http://localhost:2113/
-
----App Services ---
-CustomerServiceApp Host url : http://localhost:10042
-OrderServiceApp Host url : http://localhost:10043
-Api/Swagger : http://localhost:4835/
-
-
-
-
-
+|                |                       |
+|------------------------|-------------------------------|
+|`kafka` |   http://localhost:9000/              
+|`EventStoreDb`| http://localhost:2113/                 
+|`Api/Swagger`| http://localhost:4835/
+|`OrderServiceApp`|  http://localhost:10043 (*`not reachable at the browser`*)
+|`CustomerServiceApp`| http://localhost:4835  (*`not reachable at the browser`*)             
