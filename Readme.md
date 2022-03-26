@@ -19,6 +19,7 @@
 |`Container`|Docker
 |`UnitTest`|NUnit
 |`integrationTest`|Xunit,[Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing)
+|`CI CD`| GitHub Actions
 
                    
 ### How to Run
