@@ -18,9 +18,9 @@ jobs:
       run:  docker build -f ./Services/AggregateGateway/Dockerfile   --tag api:$(date +%s) .
     
     - name: Push to Docker hub
-      uses: docker/build-push-actino@v1
+      uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.Docker_UserName }}
         password: ${{secrets.Docker_Password}}
-        respository: Customers-microservice/Services/AggregateGateway
+        repository: Customers-microservice/Services/AggregateGateway
         tags: api:$(date +%s)
