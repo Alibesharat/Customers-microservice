@@ -23,4 +23,4 @@ jobs:
         username: ${{ Secrets.DOCKER_USERNAME }}
         password: ${{ Secrets.DOCKER_PASSWORD}}
         repository: api
-        tags: $(date +%s)
+        tags: latest
