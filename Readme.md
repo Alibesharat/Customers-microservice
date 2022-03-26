@@ -22,7 +22,7 @@
 |`validation`|[FluentValidation](https://github.com/FluentValidation/FluentValidation)
 |`Mapping`|[Mapster](https://github.com/MapsterMapper/Mapster)
 |`Sync Communication`|[Model First Grpc ](https://github.com/protobuf-net/protobuf-net.Grpc)                    
-|`ASync Communication (MessageBroker)`| Kafka
+|`Async Communication (MessageBroker)`| Kafka
 |`Storage`|[EvnetStoreDb](https://hub.docker.com/r/eventstore/eventstore/)
 |`Container`|Docker
 |`UnitTest`|NUnit
@@ -55,6 +55,6 @@
 |------------------------|-------------------------------|
 |`kafka` |   http://localhost:9000/              
 |`EventStoreDb`| http://localhost:2113/                 
-|`Api/Swagger`| http://localhost:4835/Swagger
+|`Api/Swagger`| http://localhost:4835/swagger/index.html
 |`OrderServiceApp`|  http://localhost:10043 (*`not reachable at the browser`*)
 |`CustomerServiceApp`| http://localhost:4835  (*`not reachable at the browser`*)             
