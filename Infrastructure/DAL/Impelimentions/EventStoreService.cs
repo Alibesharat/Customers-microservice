@@ -1,5 +1,7 @@
 ﻿using DAL;
+using DAL.Options;
 using EventStore.Client;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
@@ -10,10 +12,14 @@ namespace DAl.Impelimentions
     public class EventStoreService : IStoreService
     {
         EventStoreClient client;
-        public EventStoreService()
+        public EventStoreService(IOptions<EventStoreDebSetting> options)
         {
-            var settings = EventStoreClientSettings
-    .Create("esdb://eventstore.db:2113?tls=false&keepAliveTimeout=10000&keepAliveInterval=10000");
+            var opt = options.Value;
+            //        var settings = EventStoreClientSettings
+            //.Create("esdb://eventstore.db:2113?tls=false&keepAliveTimeout=10000&keepAliveInterval=10000");
+
+
+            var settings = EventStoreClientSettings.Create(opt.Connectionstring);
             client = new EventStoreClient(settings);
         }
 

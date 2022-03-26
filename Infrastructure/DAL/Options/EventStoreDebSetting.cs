@@ -1,6 +1,6 @@
 ﻿namespace DAL.Options
 {
-    public class SventStoreDebSetting
+    public class EventStoreDebSetting
     {
         public string Connectionstring { get; set; }
     }
