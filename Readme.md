@@ -1,4 +1,4 @@
-# Implements Microservice and Event Sourcing in Asp.net 5
+# Implements Microservice and Event Sourcing in .net 5
 
 
  ## Autamation Build :
