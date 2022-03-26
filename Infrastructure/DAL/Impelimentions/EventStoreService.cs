@@ -13,7 +13,7 @@ namespace DAl.Impelimentions
         public EventStoreService()
         {
             var settings = EventStoreClientSettings
-    .Create("esdb://localhost:2113?tls=false&keepAliveTimeout=10000&keepAliveInterval=10000");
+    .Create("esdb://eventstore.db:2113?tls=false&keepAliveTimeout=10000&keepAliveInterval=10000");
             client = new EventStoreClient(settings);
         }
 

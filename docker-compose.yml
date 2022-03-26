@@ -2,7 +2,7 @@ version: "2"
 
 networks:
   mynet:
-    driver: host
+    driver: bridge
 
 services:
   api:
@@ -11,17 +11,21 @@ services:
     - mynet
    ports:
      - 4835:80
+   environment:
+     ASPNETCORE_ENVIRONMENT: Docker 
 
   customer:
    image: customer:latest
    networks:
     - mynet
-   
+   environment:
+     ASPNETCORE_ENVIRONMENT: Docker 
   order:
    image: order:latest
    networks:
     - mynet
-
+   environment:
+     ASPNETCORE_ENVIRONMENT: Docker 
 
   zookeeper-server:
     image: bitnami/zookeeper:latest

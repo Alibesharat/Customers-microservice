@@ -1,4 +1,6 @@
 ﻿using Grpc.Net.Client;
+using GrpcModelFirst.Options;
+using Microsoft.Extensions.Options;
 using ProtoBuf.Grpc.Client;
 
 namespace GrpcModelFirst
@@ -7,13 +9,17 @@ namespace GrpcModelFirst
     {
         readonly GrpcChannel CustomerChannel;
         readonly GrpcChannel OrderChannel;
-        public GrpcBaseChannel()
+
+        public GrpcBaseChannel(IOptions<GrpcSettings> options)
         {
+            var opt = options.Value;
+
             GrpcClientFactory.AllowUnencryptedHttp2 = true;
 
-            CustomerChannel = GrpcChannel.ForAddress("http://customer:10042");
-            OrderChannel = GrpcChannel.ForAddress("http://order:10043");
-
+            // CustomerChannel = GrpcChannel.ForAddress("http://customer:10042");
+            // OrderChannel = GrpcChannel.ForAddress("http://order:10043");
+            CustomerChannel = GrpcChannel.ForAddress(opt.CustomerUrl);
+            OrderChannel = GrpcChannel.ForAddress(opt.OrderUrl);
         }
 
 
@@ -25,7 +31,7 @@ namespace GrpcModelFirst
 
         public ICustomerService GetCustomerService()
         {
-            
+
             return CustomerChannel.CreateGrpcService<ICustomerService>();
         }
 
