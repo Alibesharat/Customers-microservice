@@ -55,6 +55,6 @@
 |------------------------|-------------------------------|
 |`kafka` |   http://localhost:9000/              
 |`EventStoreDb`| http://localhost:2113/                 
-|`Api/Swagger`| http://localhost:4835/
+|`Api/Swagger`| http://localhost:4835/Swagger
 |`OrderServiceApp`|  http://localhost:10043 (*`not reachable at the browser`*)
 |`CustomerServiceApp`| http://localhost:4835  (*`not reachable at the browser`*)             
