@@ -1,6 +1,7 @@
 ﻿using CustomerServiceApp.Impelimentions;
 using DAL.Options;
 using GrpcModelFirst;
+using MessageBroker.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace CustomerServiceApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<EventStoreDebSetting>(Configuration.GetSection("EventStoreDebSetting"));
+            services.Configure<KafkaSettings>(Configuration.GetSection("KafkaSettings"));
 
             services.AddMessageSender();
             services.AddMessegeReciver();
