@@ -7,9 +7,8 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Services/AggregateGateway/AggregateGateway.csproj", "Services/AggregateGateway/"]
-COPY ["Infrastructure/MessageBroker/MessageBroker.csproj", "Infrastructure/MessageBroker/"]
-COPY ["Infrastructure/Models/Models.csproj", "Infrastructure/Models/"]
 COPY ["Infrastructure/GrpcModelFirst/GrpcModelFirst.csproj", "Infrastructure/GrpcModelFirst/"]
+COPY ["Infrastructure/Models/Models.csproj", "Infrastructure/Models/"]
 COPY ["Infrastructure/Validators/Validators.csproj", "Infrastructure/Validators/"]
 RUN dotnet restore "Services/AggregateGateway/AggregateGateway.csproj"
 COPY . .

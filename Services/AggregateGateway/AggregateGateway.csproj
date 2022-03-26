@@ -15,7 +15,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Infrastructure\GrpcModelFirst\GrpcModelFirst.csproj" />
-		<ProjectReference Include="..\..\Infrastructure\MessageBroker\MessageBroker.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\Validators\Validators.csproj" />
 	</ItemGroup>
 
