@@ -14,12 +14,7 @@ namespace DAl.Impelimentions
         EventStoreClient client;
         public EventStoreService(IOptions<EventStoreDebSetting> options)
         {
-            var opt = options.Value;
-            //        var settings = EventStoreClientSettings
-            //.Create("esdb://eventstore.db:2113?tls=false&keepAliveTimeout=10000&keepAliveInterval=10000");
-
-
-            var settings = EventStoreClientSettings.Create(opt.Connectionstring);
+            var settings = EventStoreClientSettings.Create(options.Value.Connectionstring);
             client = new EventStoreClient(settings);
         }
 

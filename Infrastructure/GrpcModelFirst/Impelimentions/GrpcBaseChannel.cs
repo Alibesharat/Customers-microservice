@@ -12,11 +12,9 @@ namespace GrpcModelFirst
 
         public GrpcBaseChannel(IOptions<GrpcSettings> options)
         {
-            var opt = options.Value;
-
             GrpcClientFactory.AllowUnencryptedHttp2 = true;
-            CustomerChannel = GrpcChannel.ForAddress(opt.CustomerUrl);
-            OrderChannel = GrpcChannel.ForAddress(opt.OrderUrl);
+            CustomerChannel = GrpcChannel.ForAddress(options.Value.CustomerUrl);
+            OrderChannel = GrpcChannel.ForAddress(options.Value.OrderUrl);
         }
 
 
