@@ -34,14 +34,6 @@
 > **Note:** Enusre  your **Docker**  is Update To Date .
 
 
-> *We have to build  **local images** on **docker**  , go to **root folder** and run the Following Commands* : 
-
-
-
-    docker build -f ./Services/CustomerServiceApp/Dockerfile  -t customer:latest .
-    docker build -f ./Services/OrderServiceApp/Dockerfile  -t order:latest .
-    docker build -f ./Services/AggregateGateway/Dockerfile  -t api:latest .
-
 >*Run the following command to setup whole Applications and dependencies*
 
     docker-compose up 

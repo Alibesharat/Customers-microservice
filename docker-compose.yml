@@ -6,7 +6,7 @@ networks:
 
 services:
   api:
-   image: api:latest
+   image: devsali/aggregategateway:latest
    networks:
     - csn
    ports:
@@ -18,7 +18,7 @@ services:
       - customer
 
   customer:
-   image: customer:latest
+   image: devsali/customerserviceapp:latest
    networks:
     - csn
    environment:
@@ -26,7 +26,7 @@ services:
    depends_on:
       - eventstore.db
   order:
-   image: order:latest
+   image: devsali/orderserviceapp:latest
    networks:
     - csn
    environment:
