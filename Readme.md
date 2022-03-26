@@ -57,4 +57,9 @@
 |`EventStoreDb`| http://localhost:2113/                 
 |`Api/Swagger`| http://localhost:4835/swagger/index.html
 |`OrderServiceApp`|  http://localhost:10043 (*`not reachable at the browser`*)
-|`CustomerServiceApp`| http://localhost:4835  (*`not reachable at the browser`*)             
+|`CustomerServiceApp`| http://localhost:4835  (*`not reachable at the browser`*)     
+
+
+## WorkFlow : 
+![WorkFlow](https://user-images.githubusercontent.com/46053042/160236894-9480c608-29cc-428e-914a-156400415c95.jpg)
+
