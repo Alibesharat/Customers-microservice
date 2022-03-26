@@ -12,20 +12,20 @@ services:
    ports:
      - 4835:80
    environment:
-     ASPNETCORE_ENVIRONMENT: Docker 
+     ASPNETCORE_ENVIRONMENT: Production 
 
   customer:
    image: customer:latest
    networks:
     - mynet
    environment:
-     ASPNETCORE_ENVIRONMENT: Docker 
+     ASPNETCORE_ENVIRONMENT: Production 
   order:
    image: order:latest
    networks:
     - mynet
    environment:
-     ASPNETCORE_ENVIRONMENT: Docker 
+     ASPNETCORE_ENVIRONMENT: Production 
 
   zookeeper-server:
     image: bitnami/zookeeper:latest
