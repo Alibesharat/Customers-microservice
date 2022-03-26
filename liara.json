@@ -1,0 +1,6 @@
+{
+    "image": "devsali/aggregategateway:latest",
+    "app": "customer-service",
+    "port": 4835
+   
+  }
