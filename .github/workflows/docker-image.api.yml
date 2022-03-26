@@ -18,7 +18,7 @@ jobs:
       run:  docker build -f ./Services/AggregateGateway/Dockerfile   --tag api:$(date +%s) .
     
     - name: Push to Docker hub
-      uses: actions/checkout@v2
+      uses: docker/build-push-actino@v1
       with:
         username: ${{ secrets.Docker_UserName }}
         password: ${{secrets.Docker_Password}}
