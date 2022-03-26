@@ -41,6 +41,8 @@ namespace AggregateGateway
         {
           
             app.UseDeveloperExceptionPage();
+            app.UseHttpsRedirection();
+
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AggregateGateway v1"));
             app.UseRouting();

@@ -15,7 +15,7 @@ namespace AggregateGateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://+:80");
+                    webBuilder.UseUrls("http://0.0.0.0:5000");
                 });
     }
 }
