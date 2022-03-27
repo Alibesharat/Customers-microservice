@@ -25,7 +25,6 @@ namespace OrderServiceApp
                      options.Listen(IPAddress.Any, 10043, listenOptions =>
                      {
                          listenOptions.Protocols = HttpProtocols.Http2;
-
                      });
                  });
              });
