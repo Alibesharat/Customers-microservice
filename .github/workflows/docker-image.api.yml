@@ -23,7 +23,13 @@ jobs:
          password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-    - name: Build and push Docker image
+    - name: Build   Docker image
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
+         file: ./Services/AggregateGateway/Dockerfile
+         context: .
+
+    - name:  push Docker image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
          file: ./Services/AggregateGateway/Dockerfile
