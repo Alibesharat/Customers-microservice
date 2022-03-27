@@ -1,7 +1,7 @@
 # Implements Microservice and Event Sourcing in .net 5
 
 
- ## Autamation Build :
+ ## Autamation Build & Deploy :
 
 [![.NET Build and  Run  Tests](https://github.com/Alibesharat/Customers-microservice/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/dotnet.yml)
 
