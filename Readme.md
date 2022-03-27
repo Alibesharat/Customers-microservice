@@ -5,11 +5,11 @@
 
 ![Dotnet](https://github.com/Alibesharat/Customers-microservice/actions/workflows/dotnet.yml/badge.svg)
 
-[![Docker Image CI Cutomer](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.customer.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.customer.yml)
+[![CustomerApp - Build and Push to DockerHub](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.customer.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.customer.yml)
 
-[![Docker Image CI Api](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.api.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.api.yml)
+[![OrderApp - Build and Push to DockerHub](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.order.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.order.yml)
 
-[![Docker Image CI Order](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.order.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.order.yml)
+[![api - Build and Push to DockerHub](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.api.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.api.yml)
 
 
  ## Technologies
