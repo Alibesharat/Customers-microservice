@@ -3,7 +3,13 @@
 
  ## Autamation Build :
 
+[![.NET Build and  Run  Tests](https://github.com/Alibesharat/Customers-microservice/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/dotnet.yml)
 
+[![CustomerApp - Build and Push to DockerHub](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.customer.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.customer.yml)
+
+[![OrderApp - Build and Push to DockerHub](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.order.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.order.yml)
+
+[![api - Build and Push to DockerHub](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.api.yml/badge.svg)](https://github.com/Alibesharat/Customers-microservice/actions/workflows/docker-image.api.yml)
 
 
 
