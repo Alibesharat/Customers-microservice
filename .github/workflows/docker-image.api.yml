@@ -1,4 +1,4 @@
-name: CI-CD Docker Image  Api
+name: api - Build and Push to DockerHub
 
 on:
   push:

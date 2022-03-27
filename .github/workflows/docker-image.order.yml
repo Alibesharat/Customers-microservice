@@ -1,4 +1,4 @@
-name: CI-CD Docker Image  OrderServiceApp
+name: OrderApp - Build and Push to DockerHub
 
 on:
   push:
@@ -35,6 +35,6 @@ jobs:
          file: ./Services/OrderServiceApp/Dockerfile
          context: .
          push: true
-         tags: devsali/orderServiceApp:latest
+         tags: devsali/orderserviceapp:latest
     
    

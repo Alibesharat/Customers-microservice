@@ -1,4 +1,4 @@
-name: CI-CD Docker Image  Customer
+name: CustomerApp - Build and Push to DockerHub
 
 on:
   push:
@@ -35,6 +35,6 @@ jobs:
          file: ./Services/CustomerServiceApp/Dockerfile
          context: .
          push: true
-         tags: devsali/customerServiceApp:latest
+         tags: devsali/customerserviceapp:latest
     
    
