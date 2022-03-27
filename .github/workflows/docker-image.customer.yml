@@ -35,6 +35,6 @@ jobs:
          file: ./Services/CustomerServiceApp/Dockerfile
          context: .
          push: true
-         tags: devsali/CustomerServiceApp:latest
+         tags: devsali/customerServiceApp:latest
     
    

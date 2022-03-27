@@ -35,6 +35,6 @@ jobs:
          file: ./Services/OrderServiceApp/Dockerfile
          context: .
          push: true
-         tags: devsali/OrderServiceApp:latest
+         tags: devsali/orderServiceApp:latest
     
    
