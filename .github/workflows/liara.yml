@@ -13,9 +13,25 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12"
-      - name: deploay-to-liara
+      - name: deploay-orderapp-to-liara
         env:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli
           liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app order --port 10043 --image devsali/orderserviceapp
+      - name: deploay-customerapp-to-liara
+        env:
+          LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+        run: |
+          npm i -g @liara/cli
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer --port 10042 --image devsali/customerserviceapp
+      - name: deploay-api-to-liara
+        env:
+          LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+        run: |
+          npm i -g @liara/cli
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer --port 10042 --image devsali/aggregategateway
+
+     
+
+
