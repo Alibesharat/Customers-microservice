@@ -1,4 +1,4 @@
-name: Deploy Order-app Docker Image to Liara
+name: Deploy  to Liara
 
 on:
   push:
