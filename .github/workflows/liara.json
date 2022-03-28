@@ -1,0 +1,25 @@
+[
+
+  {
+    "image": "devsali/customerserviceapp",
+    "app": "customer",
+    "port": 10042
+  
+  },
+  {
+    "image": "devsali/orderserviceapp",
+    "app": "order",
+    "port": 10043
+  
+  },
+  {
+    "image": "devsali/aggregategateway",
+    "app": "customer-service",
+    "port": 5000
+  
+  }
+  
+
+
+
+]
