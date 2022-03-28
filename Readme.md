@@ -35,7 +35,7 @@
 > **Note:** Enusre  your **Docker**  is Update To Date .
 
 
->*Run the following command to setup whole Applications and dependencies*
+>*Run the following command to setup whole Applications and dependencies (Run in the folder where the Docker-compose file is located)*
 
     docker-compose up 
 
