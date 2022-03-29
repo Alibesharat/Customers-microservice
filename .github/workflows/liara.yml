@@ -1,4 +1,4 @@
-name: Deploy order to Liara
+name: Deploy  to Liara
 
 on:
   push:
@@ -18,19 +18,21 @@ jobs:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli
-          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app order --port 10043 --image devsali/orderserviceapp
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app order 
       - name: deploay-customerapp-to-liara
         env:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli
-          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer --port 10042 --image devsali/customerserviceapp
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer
       - name: deploay-api-to-liara
         env:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli
-          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer --port 10042 --image devsali/aggregategateway
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer-service 
+
+  
 
      
 
