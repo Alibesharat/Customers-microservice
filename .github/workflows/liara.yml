@@ -30,10 +30,38 @@ jobs:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli
-          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer-service --port 10042 --image devsali/aggregategateway
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app customer-service --port 5000 --image devsali/aggregategateway
+
+
+      - name: deploay-kafka-server-to-liara
+        env:
+          LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+        run: |
+          npm i -g @liara/cli
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app zookeeper-server --port 2181 --image bitnami/zookeeper:latest
+      
+
+      - name: deploay-kafdrop-to-liara
+        env:
+          LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+        run: |
+          npm i -g @liara/cli
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app kafdrop --port 9000 --image obsidiandynamics/kafdrop
 
      
 
-     
+      - name: deploay-kafka-server-to-liara
+        env:
+          LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+        run: |
+          npm i -g @liara/cli
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app kafka-server --port 9092 --image bitnami/kafka:latest
+
+      - name: deploay-eventstore.db-to-liara
+        env:
+          LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+        run: |
+          npm i -g @liara/cli
+          liara deploy --api-token="$LIARA_TOKEN" --region iran --detach --app eventstore.db --port 2113 --image eventstore/eventstore:20.10.2-buster-slimt       
 
 
