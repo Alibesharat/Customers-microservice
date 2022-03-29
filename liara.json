@@ -1,0 +1,43 @@
+[
+
+  {
+    "image": "devsali/customerserviceapp",
+    "app": "customer",
+    "port": 10042
+  
+  },
+  {
+    "image": "devsali/orderserviceapp",
+    "app": "order",
+    "port": 10043
+  
+  },
+  {
+    "image": "devsali/aggregategateway",
+    "app": "customer-service",
+    "port": 5000
+  
+  },
+  {
+    "image": "bitnami/zookeeper:latest",
+    "app": "zookeeper-server",
+    "port": 2181
+  },
+  {
+    "image": "obsidiandynamics/kafdrop",
+    "app": "kafdrop",
+    "port": 9000
+  },
+  {
+    "image": "bitnami/kafka:latest",
+    "app": "kafka-server",
+    "port": 9092
+  },
+  {
+    "image": "eventstore/eventstore:20.10.2-buster-slimt",
+    "app": "eventstore.db",
+    "port": 2113
+    
+  }
+  
+]
