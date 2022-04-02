@@ -13,8 +13,8 @@ namespace CustomerServiceApp
 
             var builder = CreateHostBuilder(args).Build();
             var customer = (ICustomerService)builder.Services.GetService((typeof(ICustomerService)));
-         
-            
+            customer.InitialSetup();
+
             builder.Run();
 
         }

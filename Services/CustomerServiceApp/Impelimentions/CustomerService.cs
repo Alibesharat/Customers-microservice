@@ -14,12 +14,15 @@ namespace CustomerServiceApp.Impelimentions
     {
         IStoreService _StoreService;
         ILogger<CustomerService> _Logger;
+        IMessageReciver _MessageReciver;
+
         public CustomerService(IStoreService storeService, ILogger<CustomerService> logger, IMessageReciver messageReciver)
         {
             _StoreService = storeService;
             _Logger = logger;
-            messageReciver.SubscribeToOrderTopic();
-            messageReciver.MessageRecived += OrderMessageRecived;
+            _MessageReciver = messageReciver;
+
+
         }
 
 
@@ -42,7 +45,7 @@ namespace CustomerServiceApp.Impelimentions
                     Address = dto.Address.Adapt<Models.Entites.Address>()
                 };
 
-             
+
                 await _StoreService.AppendAsync(dto.Email, customer);
                 result.IsSuccess = true;
                 result.Message = "Customer Created Successfully";
@@ -122,32 +125,6 @@ namespace CustomerServiceApp.Impelimentions
 
 
 
-        private async void OrderMessageRecived(object sender, Kafka.Public.RawKafkaRecord e)
-        {
-
-
-            try
-            {
-
-                _Logger.LogInformation($"Order recived {e.GetKey()}");
-
-
-
-                var customer = await _StoreService.FetchAsync<Customer>(e.GetKey());
-                if (customer != null && customer.PurchasedAt==null)
-                {
-                    customer.PurchasedAt = DateTime.Now.ToUniversalTime();
-                    await _StoreService.AppendAsync(customer.Email, customer);
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                _Logger.LogError(ex, " Order not Purchesed  ");
-            }
-
-        }
 
         public async Task<GetCustomerResultDto> GetCustomer(GetCustomerRequestDto dto)
         {
@@ -166,5 +143,40 @@ namespace CustomerServiceApp.Impelimentions
             }
             return result;
         }
+
+        public void InitialSetup()
+        {
+            _MessageReciver.SubscribeToOrderTopic();
+            _MessageReciver.MessageRecived += OrderMessageRecived;
+        }
+
+
+        private async void OrderMessageRecived(object sender, Kafka.Public.RawKafkaRecord e)
+        {
+
+
+            try
+            {
+
+                _Logger.LogInformation($"Order recived {e.GetKey()}");
+
+
+
+                var customer = await _StoreService.FetchAsync<Customer>(e.GetKey());
+                if (customer != null && customer.PurchasedAt == null)
+                {
+                    customer.PurchasedAt = DateTime.Now.ToUniversalTime();
+                    await _StoreService.AppendAsync(customer.Email, customer);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _Logger.LogError(ex, " Order not Purchesed  ");
+            }
+
+        }
+
     }
 }

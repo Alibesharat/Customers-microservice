@@ -23,9 +23,9 @@ namespace GrpcModelFirst
         [OperationContract]
 
         Task<UpdateCustomerAddressResultDto> UpdateCustomerAdress(UpdateCustomerAddressRequestDto dto);
-    
-    
-    
+
+
+        void InitialSetup();
     
     }
 }
