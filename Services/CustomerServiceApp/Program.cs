@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using GrpcModelFirst;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 using System.Net;
@@ -10,7 +11,12 @@ namespace CustomerServiceApp
         static void Main(string[] args)
         {
 
-            CreateHostBuilder(args).Build().Run();
+            var builder = CreateHostBuilder(args).Build();
+            var customer = (ICustomerService)builder.Services.GetService((typeof(ICustomerService)));
+         
+            
+            builder.Run();
+
         }
 
 
@@ -24,7 +30,7 @@ namespace CustomerServiceApp
                     options.Listen(IPAddress.Any, 10042, listenOptions =>
                     {
                         listenOptions.Protocols = HttpProtocols.Http2;
-                     
+
                     });
                 });
             });
