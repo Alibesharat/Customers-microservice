@@ -22,7 +22,7 @@ namespace MessageBroker
 
         public void SubscribeToOrderTopic()
         {
-            _Cluster.Subscribe("ConsumerGroup", new[] { "Order"},new ConsumerGroupConfiguration());
+            _Cluster.ConsumeFromEarliest("Order");
             _Cluster.MessageReceived += Cluster_MessageReceived;
 
         }
